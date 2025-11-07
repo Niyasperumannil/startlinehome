@@ -1,0 +1,276 @@
+/* ---------------------- */
+/* Global Reset & Layout  */
+/* ---------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color: #fff;
+  color: #000;
+  overflow-x: hidden;
+}
+
+/* ---------------------- */
+/* Main Container Styles  */
+/* ---------------------- */
+.services-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
+
+/* Header */
+.services-header h1 {
+  font-family: Gilroy;
+  font-size: 60px;
+  font-weight: 300;
+  line-height: 60px;
+  color: rgb(51, 51, 51);
+  margin-bottom: 60px;
+  text-align: left;
+  margin-left: 190px;
+}
+
+/* ---------------------- */
+/* Service Section Layout */
+/* ---------------------- */
+.service-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 120px;
+  gap: 10px;
+}
+
+/* Versace Card */
+.service-card-versace .versace-text {
+  flex: 1;
+}
+.service-card-versace .versace-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.versace-image img {
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: 0;
+  padding-left: 40px;
+  margin-right: 190px;
+}
+.versace-btn {
+  border-color: #000;
+}
+
+/* Furniture Card */
+.service-card-furniture {
+  background-color: white;
+  padding: 40px;
+  border-radius: 8px;
+  margin-left: -99px;
+}
+.service-card-furniture .furniture-text {
+  flex: 1;
+  margin-left: -199px;
+  margin-right: 50px;
+}
+.service-card-furniture .furniture-text  p {
+   font-family: Gilroy;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgb(51, 51, 51);
+  margin-bottom: 25px;
+  margin-left: 195px;
+  max-width: 480px;
+}
+.service-card-furniture .furniture-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+.furniture-image img {
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: 0;
+  padding-right: 40px;
+  margin-left: 250px;
+}
+.furniture-btn {
+  border-color: #000;
+}
+
+/* ---------------------- */
+/* Text Styles */
+/* ---------------------- */
+.service-text h2 {
+  font-family: Gilroy;
+  font-size: 48px;
+  font-weight: 100;
+  line-height: 48px;
+  color: rgb(51, 51, 51);
+  margin-bottom: 25px;
+  margin-left: 190px;
+}
+
+.service-text p {
+  font-family: Gilroy;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgb(51, 51, 51);
+  margin-bottom: 25px;
+  margin-left: 195px;
+}
+
+.read-more-btn {
+  font-size: 10px;
+  padding: 15px 16px;
+  border: 1px solid #000;
+  background: transparent;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 195px;
+}
+
+.read-more-btn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* ---------------------- */
+/* Responsive Design */
+/* ---------------------- */
+
+/* Tablet (≤992px) */
+@media (max-width: 992px) {
+  .service-block {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .service-text {
+    width: 100%;
+  }
+
+  .service-image img {
+    max-height: 350px;
+  }
+
+  .services-header h1 {
+    font-size: 30px;
+  }
+}
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .services-container {
+    padding: 40px 20px;
+  }
+
+  .service-text h2 {
+    font-size: 18px;
+  }
+
+  .service-text p {
+    font-size: 11px;
+  }
+
+  .read-more-btn {
+    font-size: 9px;
+    padding: 5px 12px;
+  }
+
+  .service-image img {
+    max-height: 280px;
+  }
+}
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
+  .services-container {
+    padding: 30px 15px;
+  }
+  .services-header h1 {
+  font-family: Gilroy;
+  font-size: 60px;
+  font-weight: 300;
+  line-height: 60px;
+  color: rgb(51, 51, 51);
+  margin-bottom: 60px;
+  text-align: left;
+  margin-left: 10px;
+}
+.service-text h2 {
+  font-family: Gilroy;
+  font-weight: 100;
+  line-height: 28px;
+  color: rgb(51, 51, 51);
+  margin-bottom: 25px;
+  margin-left: 10px;
+  text-align: left;
+}
+
+.service-text p {
+  font-family: Gilroy;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgb(51, 51, 51);
+  margin-bottom: 25px;
+  margin-left: 9px;
+  text-align: left;
+}
+
+  .read-more-btn {
+    font-size: 8px;
+    padding: 8px 10px;
+    margin-left: -280px;
+  }
+
+  .service-image img {
+    max-height: 220px;
+    margin-left: 190px;
+  }
+  .service-card-furniture .furniture-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: -210px;
+  margin-top: -150px;
+}
+.service-card-furniture .furniture-text {
+  flex: 1;
+  margin-left: 159px;
+  margin-right: 50px;
+}
+ .service-card-furniture .furniture-text  p {
+   font-family: Gilroy;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgb(51, 51, 51);
+  margin-bottom: 25px;
+  margin-left: 10px;
+  max-width: 350px;
+}                               
+
+  .services-header h1 {
+    font-size: 26px;
+  }
+}

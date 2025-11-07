@@ -1,0 +1,163 @@
+/* ----------------------------- */
+/* Global Reset and Smooth Scroll */
+/* ----------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #fff;
+  background-color: #000;
+  overflow-x: hidden;
+}
+
+/* ----------------------------- */
+/* Section Styles */
+/* ----------------------------- */
+.section-container {
+  position: relative;
+  width: 100%;
+  height: 720px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.section-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: zoomIn 15s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+/* Smooth zoom effect (Ken Burns style) */
+@keyframes zoomIn {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+/* ----------------------------- */
+/* Text Overlay */
+/* ----------------------------- */
+.section-overlay {
+  position: relative;
+  z-index: 2;
+  text-align: left;
+  max-width: 900px;
+  padding: 40px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.section-title {
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 72px;
+  margin-bottom: 20px;
+}
+
+.section-text {
+  font-size: 18px;
+  line-height: 28px;
+  max-width: 700px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ----------------------------- */
+/* Fade In Animation */
+/* ----------------------------- */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ----------------------------- */
+/* Responsive Design */
+/* ----------------------------- */
+
+/* Tablet (≤1024px) */
+@media (max-width: 1024px) {
+  .section-container {
+    height: 600px;
+  }
+
+  .section-title {
+    font-size: 48px;
+    line-height: 56px;
+  }
+
+  .section-text {
+    font-size: 16px;
+    max-width: 600px;
+  }
+}
+
+/* Medium Mobile (≤768px) */
+@media (max-width: 768px) {
+  .section-container {
+    height: 500px;
+    padding: 20px;
+  }
+
+  .section-overlay {
+    padding: 20px;
+  }
+
+  .section-title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  .section-text {
+    font-size: 15px;
+    line-height: 24px;
+  }
+}
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
+  .section-container {
+    height: 460px;
+  }
+
+  .section-overlay {
+    padding: 15px;
+  }
+
+  .section-title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .section-text {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}

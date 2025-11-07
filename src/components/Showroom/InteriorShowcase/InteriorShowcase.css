@@ -1,0 +1,134 @@
+/* ---------- GLOBAL RESET + SMOOTH SCROLL ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color: #ffffff;
+  color: #111111;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- INTERIOR SHOWCASE SECTION ---------- */
+
+.interior-showcase-section {
+  width: 100%;
+  background-color: #ffffff;
+  padding-top: 120px;
+  padding-bottom: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.interior-showcase-container {
+  max-width: 1100px;
+  width: 100%;
+  text-align: left;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.interior-showcase-heading {
+  font-family: Gilroy;
+font-size: 60px;
+font-weight: 300;
+line-height: 60px;
+color: rgb(51, 51, 51);
+  margin-bottom: 40px;
+  margin-left: -50px;
+}
+
+.interior-showcase-description {
+  font-family: Gilroy;
+font-size: 16px;
+font-weight: 400;
+line-height: 24px;
+color: rgb(51, 51, 51);
+  max-width: 500px;
+  margin-left: 30px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+/* Tablet (<=1024px) */
+@media (max-width: 1024px) {
+  .interior-showcase-section {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+
+  .interior-showcase-container {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  .interior-showcase-heading {
+    font-size: 72px;
+    margin-bottom: 30px;
+  }
+
+  .interior-showcase-description {
+    font-size: 17px;
+    line-height: 30px;
+    max-width: 600px;
+  }
+}
+
+/* Mobile (<=768px) */
+@media (max-width: 768px) {
+  .interior-showcase-section {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .interior-showcase-container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .interior-showcase-heading {
+    font-size: 56px;
+    margin-bottom: 25px;
+  }
+
+  .interior-showcase-description {
+    font-size: 16px;
+    line-height: 28px;
+    max-width: 100%;
+  }
+}
+
+/* Small Mobile (<=480px) */
+@media (max-width: 480px) {
+  .interior-showcase-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .interior-showcase-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .interior-showcase-heading {
+    font-size: 42px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+  }
+
+  .interior-showcase-description {
+    font-size: 15px;
+    line-height: 26px;
+        margin-left: 10px;
+
+  }
+}

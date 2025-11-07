@@ -1,0 +1,7 @@
+/* Hero.css */
+.hero-container {
+  text-align: center;
+  padding: 20px;
+}
+
+/* If the page is RTL, the text alignment may be naturally handled by dir="rtl" */

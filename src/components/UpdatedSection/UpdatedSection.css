@@ -1,0 +1,182 @@
+/* Global Reset + Smooth Scrolling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #000000;
+  background-color: #ffffff;
+}
+
+/* Section Layout */
+.us-section {
+  width: 100%;
+  padding-top: 120px;
+  padding-bottom: 120px;
+  padding-left: 250px;
+  padding-right: 100px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.us-inner {
+  max-width: 1400px;
+  width: 100%;
+}
+
+/* Title */
+.us-title {
+ font-family: Gilroy;
+font-size: 38px;
+font-weight: 300;
+line-height: 48px;
+color: rgb(51, 51, 51);
+  margin-bottom: 24px;
+}
+.us-titleBold {
+font-family: Gilroy;
+font-size: 38px;
+font-weight: 100;
+line-height: 48px;
+color: rgb(51, 51, 51);}
+
+/* Text / Description */
+.us-text {
+font-family: Gilroy;
+font-size: 16px;
+font-weight: 400;
+line-height: 20px;
+color: rgb(51, 51, 51);
+  max-width: 400px;
+  margin-bottom: 40px;
+  margin-left: 70px;
+}
+.us-link {
+  text-decoration: underline;
+  color: inherit;
+  font-weight: 600;
+}
+
+/* Buttons */
+.us-buttonGroup {
+  display: flex;
+  margin-left: -400px;
+  margin-bottom: -70px;
+  gap: 3px;
+}
+.us-btn {
+  font-family: Gilroy;
+font-size: 12px;
+font-weight: 400;
+line-height: 16px;
+color: rgb(51, 51, 51);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 24px;
+  border: 2px solid #000000;
+  background-color: transparent;
+  cursor: pointer;
+  text-transform: uppercase;;
+}
+
+.us-btnOutline:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Responsive – Mobile Breakpoints */
+@media (max-width: 1200px) {
+  .us-section {
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .us-title {
+    font-size: 56px;
+  }
+  .us-text {
+    font-size: 16px;
+    max-width: 600px;
+    margin-bottom: 32px;
+  }
+  .us-buttonGroup {
+    gap: 16px;
+  }
+  .us-btn {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 900px) {
+  .us-section {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  .us-title {
+    font-size: 44px;
+  }
+  .us-text {
+    font-size: 15px;
+    max-width: 100%;
+    margin-bottom: 28px;
+  }
+  .us-buttonGroup {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .us-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .us-section {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .us-title {
+    font-size: 38px;
+  }
+ .us-text {
+font-family: Gilroy;
+font-size: 16px;
+font-weight: 400;
+line-height: 20px;
+color: rgb(51, 51, 51);
+  max-width: 400px;
+  margin-bottom: 40px;
+  margin-left: 10px;
+  align-items: left;
+}
+  .us-buttonGroup {
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 150px;
+  }
+  .us-btn {
+    font-size: 14px;
+    padding-left: 1px;
+    padding-right: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 24px;
+  }
+}

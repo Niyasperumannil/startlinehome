@@ -1,0 +1,188 @@
+/* ----------------------------- */
+/* Global Reset + Smooth Scroll */
+/* ----------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color: #fff;
+  color: #000;
+  overflow-x: hidden;
+}
+
+/* ----------------------------- */
+/* Gallery Section */
+/* ----------------------------- */
+.gallery-section {
+  width: 100%;
+  padding: 0px 0;
+  background-color: #fff;
+}
+
+/* Grid Layout */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  width: 100%;
+}
+
+/* Each Card */
+.gallery-card {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  animation-name: fadeInUp;
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+.fade-in {
+  animation-play-state: running;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s ease-in-out;
+}
+
+.gallery-card:hover .gallery-image {
+  transform: scale(1.05);
+}
+
+/* Text Overlay */
+.gallery-info {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #fff;
+  z-index: 2;
+  text-transform: uppercase;
+}
+
+.gallery-title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.gallery-size {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* ----------------------------- */
+/* Load More Button */
+/* ----------------------------- */
+.load-more-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.load-more-btn {
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #000;
+  padding: 12px 36px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.load-more-btn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* ----------------------------- */
+/* Responsive Design */
+/* ----------------------------- */
+
+/* Desktop Mid (≤1200px) */
+@media (max-width: 1200px) {
+  .gallery-card {
+    height: 360px;
+  }
+  .gallery-title {
+    font-size: 15px;
+  }
+}
+
+/* Tablet (≤992px) */
+@media (max-width: 992px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gallery-card {
+    height: 340px;
+  }
+}
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .gallery-card {
+    height: 320px;
+  }
+  .gallery-title {
+    font-size: 14px;
+  }
+  .gallery-size {
+    font-size: 13px;
+  }
+}
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
+  .gallery-card {
+    height: 280px;
+  }
+
+  .gallery-info {
+    bottom: 15px;
+    left: 15px;
+  }
+
+  .gallery-title {
+    font-size: 13px;
+  }
+
+  .gallery-size {
+    font-size: 12px;
+  }
+
+  .load-more-btn {
+    padding: 10px 28px;
+    font-size: 13px;
+  }
+}

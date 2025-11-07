@@ -1,0 +1,251 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Gilroy", "Helvetica Neue", Arial, sans-serif;
+  background-color: #fff;
+  color: #000;
+}
+
+/* ===== About Section ===== */
+.about-section {
+  width: 100%;
+  padding: 100px 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+}
+
+.about-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 80px;
+  max-width: 1300px;
+  width: 100%;
+}
+
+/* ===== Text Content ===== */
+.about-text {
+  flex: 1;
+}
+
+.about-title {
+  color: #2b2b2b;
+  font-family: "Gilroy", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  margin-bottom: 40px;
+  margin-left: 100px;
+}
+
+.about-title .line1 {
+  font-family: Gilroy;
+font-size: 48px;
+font-weight: 300;
+line-height: 48px;
+color: rgb(51, 51, 51);
+}
+
+.about-title .line2 {
+ font-family: Gilroy;
+font-size: 48px;
+font-weight: 100;
+line-height: 48px;
+color: rgb(51, 51, 51); 
+margin-left: 70px;
+}
+
+/* .about-title .bold {
+  font-weight: 500;
+} */
+
+/* .about-title .light {
+  font-weight: 200;
+  margin-left: 5px;
+} */
+
+/* ===== Description ===== */
+.about-description {
+  font-family: Gilroy;
+font-size: 16px;
+font-weight: 400;
+line-height: 20px;
+color: rgb(51, 51, 51);
+  margin-bottom: 20px;
+  max-width: 690px;
+  margin-left: 170px;
+  width: 600px;
+}
+
+/* ===== Button ===== */
+.about-btn {
+  padding: 14px 38px;
+  font-family: Gilroy;
+font-size: 12px;
+font-weight: 400;
+line-height: 16px;
+color: rgb(51, 51, 51);
+  border: 1px solid #000;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 170px;
+}
+/* ===== WhatsApp Floating Button ===== */
+.whatsapp-float {
+  position: fixed;
+  width: 55px;
+  height: 55px;
+  bottom: 25px;
+  right: 25px;
+  background-color: #25d366;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 28px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  background-color: #1ebd5a;
+  transform: scale(1.1);
+}
+
+.whatsapp-icon {
+  vertical-align: middle;
+}
+
+.about-btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* ===== Image ===== */
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 350px;
+  object-fit: cover;
+  border-radius: 6px;
+  transition: transform 0.4s ease;
+  margin-right: 120px;
+  margin-top: -50px;
+}
+
+.about-image img:hover {
+  transform: scale(1.02);
+}
+
+/* ===== Responsive Design ===== */
+
+/* 🖥️ Laptop (≤ 1024px) */
+@media (max-width: 1024px) {
+  .about-section {
+    padding: 80px 50px;
+  }
+
+  .about-title .line1,
+  .about-title .line2 {
+    font-size: 54px;
+    line-height: 64px;
+  }
+}
+
+/* 📱 Tablet (≤ 768px) */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-title .line1,
+  .about-title .line2 {
+    font-size: 42px;
+    line-height: 50px;
+  }
+
+  .about-description {
+    font-size: 16px;
+    line-height: 26px;
+    margin: 0 auto 30px auto;
+    max-width: 90%;
+  }
+
+  .about-image img {
+    max-width: 480px;
+  }
+}
+
+/* 📞 Mobile (≤ 480px) */
+@media (max-width: 480px) {
+  .about-section {
+    padding: 30px 25px;
+  }
+
+.about-title {
+  color: #2b2b2b;
+  font-family: "Gilroy", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  margin-bottom: 40px;
+  margin-left: 10px;
+  text-align: left;
+}
+
+.about-title .line1 {
+  font-family: Gilroy;
+font-size: 38px;
+font-weight: 300;
+line-height: 48px;
+color: rgb(51, 51, 51);
+}
+
+.about-title .line2 {
+ font-family: Gilroy;
+font-size: 38px;
+font-weight: 100;
+line-height: 48px;
+color: rgb(51, 51, 51); 
+margin-left: 70px;
+}
+
+  .about-description {
+    font-size: 15px;
+    line-height: 24px;
+    text-align: left;
+    max-width: 350px;
+  }
+
+  .about-btn {
+    padding: 10px 26px;
+    font-size: 14px;
+    margin-left: -220px;
+  }
+  .about-image img {
+  width: 100%;
+  max-width: 350px;
+  object-fit: cover;
+  border-radius: 6px;
+  transition: transform 0.4s ease;
+  margin-right: 10px;
+  margin-top: 1px;
+}
+}

@@ -1,0 +1,75 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+
+/* ===== Section Layout ===== */
+.fwi-section {
+  width: 100%;
+  overflow: hidden;
+}
+
+.fwi-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* ===== Desktop Scaling (3 widths) ===== */
+@media (max-width: 1400px) {
+  .fwi-image {
+    /* still full width, no other change */
+  }
+}
+
+@media (max-width: 1200px) {
+  .fwi-image {
+    /* still full width */
+  }
+}
+
+/* ===== Tablet ===== */
+@media (max-width: 992px) {
+  .fwi-section {
+    /* if you need some padding, you can add */
+    padding: 0 40px;
+  }
+  .fwi-image {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+  .fwi-section {
+    padding: 0 25px;
+  }
+  .fwi-image {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* ===== Small Mobile ===== */
+@media (max-width: 480px) {
+  .fwi-section {
+    padding: 0 20px;
+    margin-top: -90px;
+  }
+  .fwi-image {
+    width: 100%;
+    max-width: 100%;
+  }
+}

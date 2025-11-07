@@ -1,0 +1,156 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: "Poppins", sans-serif;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== Team Section ===== */
+.team-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: url("https://www.solomia-home.ae/storage/IMG_0217-2560w.jpg") center center no-repeat;
+  background-size: cover;
+}
+
+/* Hide <img> fallback if still present */
+.team-section img.team-image {
+  display: none;
+}
+
+/* ===== Overlay Text ===== */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: #fff;
+  text-align: left;
+  padding: 0 60px;
+}
+
+.member {
+  position: relative;
+  max-width: 300px;
+}
+
+.name {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 32px;
+  letter-spacing: 0.5px;
+}
+
+.role {
+  font-size: 15px;
+  opacity: 0.9;
+  margin-top: 4px;
+}
+
+/* ===== Position Adjustments (Desktop) ===== */
+.member-left {
+  transform: translateX(-80px);
+}
+
+.member-center {
+  transform: translateY(40px);
+}
+
+.member-right {
+  transform: translateX(80px);
+}
+
+/* ===== Responsive Design ===== */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .overlay {
+    padding: 0 30px;
+    justify-content: space-around;
+  }
+
+  .name {
+    font-size: 18px;
+  }
+
+  .role {
+    font-size: 13px;
+  }
+
+  .member-left {
+    transform: translateX(-40px);
+  }
+
+  .member-right {
+    transform: translateX(40px);
+  }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  .team-section {
+    height: auto; /* let height expand if needed */
+    padding: 60px 0; /* give some top/bottom padding */
+  }
+
+  .overlay {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 0 20px;
+  }
+
+  .member {
+    text-align: center;
+    max-width: 260px;
+  }
+
+  .name {
+       display: none;
+
+  }
+
+  .role {
+    display: none;
+  }
+
+  .member-left,
+  .member-center,
+  .member-right {
+    transform: none;
+  }
+}
+
+/* Mobile Small (max-width: 480px) */
+@media (max-width: 480px) {
+    .team-section {
+    height: auto; /* let height expand if needed */
+    padding: 120px 0; /* give some top/bottom padding */
+  }
+  .name {
+    display: none;
+  }
+
+  .role {
+    display: none;
+  }
+
+  .overlay {
+    gap: 25px;
+    padding: 0 10px;
+  }
+}

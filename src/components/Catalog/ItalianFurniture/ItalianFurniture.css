@@ -1,0 +1,231 @@
+/* 🌍 Global Reset + Smooth Scroll */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* 🔹 Section Layout */
+.italian-section {
+  width: 100%;
+  padding: 40px 80px;
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+/* 🔹 Header */
+.italian-header {
+  text-align: left;
+  margin-bottom: 50px;
+}
+
+.italian-title {
+ font-family: Gilroy;
+font-size: 48px;
+font-weight: 300;
+line-height: 48px;
+color: rgb(51, 51, 51);
+margin-left: 155px;
+}
+
+.italian-subtitle {
+ font-family: Gilroy;
+font-size: 48px;
+font-weight: 100;
+line-height: 58px;
+color: rgb(51, 51, 51);
+margin-left: 220px;
+}
+
+/* 🔹 Brands Grid */
+.italian-brands {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding-left: 160px;
+  padding-right: 150px;
+  padding-top: -10px;
+  margin-top: -10px;
+}
+
+/* 🔹 Brand Card */
+.brand-card {
+  width: calc(50% - 20px);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  overflow: hidden;
+  border-radius: 4px;
+  position: relative;
+}
+
+/* 🔹 Animated Image Wrapper */
+.animated-image {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+}
+
+.brand-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  animation: imageMotion 8s ease-in-out infinite alternate;
+}
+
+/* 🔹 Smooth subtle motion effect */
+@keyframes imageMotion {
+  0% {
+    transform: scale(1.05) translateY(0px);
+  }
+  50% {
+    transform: scale(1.1) translateY(-8px);
+  }
+  100% {
+    transform: scale(1.05) translateY(0px);
+  }
+}
+
+/* 🔹 Content */
+.brand-content {
+  padding-top: 20px;
+}
+
+.brand-name {
+  font-family: Gilroy;
+font-size: 18px;
+font-weight: 600;
+line-height: 27px;
+color: rgb(51, 51, 51);
+  margin-bottom: 10px;
+}
+
+.brand-description {
+font-family: Gilroy;
+font-size: 16px;
+font-weight: 400;
+line-height: 24px;
+color: rgb(51, 51, 51);
+  margin-bottom: 25px;
+}
+
+/* 🔹 Button */
+.view-btn {
+  background-color: transparent;
+  border: 1px solid #000;
+  font-family: Gilroy;
+font-size: 12px;
+font-weight: 400;
+line-height: 16px;
+color: rgb(51, 51, 51);
+  padding: 13px 180px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-btn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* 📱 RESPONSIVE DESIGN */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .italian-section {
+    padding: 50px 40px;
+  }
+
+  .brand-card {
+    width: 100%;
+  }
+
+  .animated-image {
+    height: 320px;
+  }
+
+  .italian-title {
+    font-size: 42px;
+  }
+
+  .italian-subtitle {
+    font-size: 30px;
+  }
+}
+
+/* Mobile (up to 768px) */
+@media (max-width: 768px) {
+  .italian-section {
+    padding: 40px 25px;
+  }
+
+  .italian-brands {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .brand-card {
+    width: 100%;
+  }
+
+  .animated-image {
+    height: 280px;
+  }
+
+  .brand-name {
+    font-size: 16px;
+  }
+
+  .brand-description {
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  .view-btn {
+    font-size: 11px;
+    padding: 10px 22px;
+  }
+}
+
+/* Small Mobile (up to 480px) */
+@media (max-width: 480px) {
+  .italian-section {
+    padding: 30px 15px;
+  }
+
+  .italian-title {
+    font-size: 36px;
+    margin-left: 10px;
+  }
+
+  .italian-subtitle {
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  .italian-brands {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding-left: 10px;
+  padding-right: 20px;
+}
+  .animated-image {
+    height: 240px;
+  }
+}

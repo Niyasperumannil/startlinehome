@@ -1,0 +1,146 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ===== Projects Header Section ===== */
+.projects-header {
+  width: 100%;
+  padding: 80px 220px;
+  background-color: #fff;
+}
+
+.projects-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* ===== Title Styles ===== */
+.projects-title {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.projects-title-bold {
+  font-family: Gilroy;
+font-size: 48px;
+font-weight: 300;
+line-height: 48px;
+color: rgb(51, 51, 51);
+}
+
+.projects-title-light {
+  font-family: Gilroy;
+font-size: 48px;
+font-weight: 100;
+line-height: 48px;
+color: rgb(51, 51, 51);
+}
+
+/* ===== Button ===== */
+.projects-btn {
+  font-family: Gilroy;
+font-size: 12px;
+font-weight: 400;
+line-height: 16px;
+color: rgb(51, 51, 51);
+  background: none;
+  border: 1px solid #2b2b2b;
+  padding: 16px 40px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 4px;
+}
+
+.projects-btn:hover {
+  background-color: #2b2b2b;
+  color: #fff;
+}
+
+/* ===== Smooth Animation on Scroll ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.projects-header {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* ===== Responsive Design ===== */
+
+/* Large Tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .projects-header {
+    padding: 60px 80px;
+  }
+  .projects-title-bold,
+  .projects-title-light {
+    font-size: 52px;
+    line-height: 56px;
+  }
+  .projects-btn {
+    padding: 14px 32px;
+  }
+}
+
+/* Tablets (≤768px) */
+@media (max-width: 768px) {
+  .projects-header {
+    padding: 50px 40px;
+  }
+  .projects-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+  .projects-title-bold,
+  .projects-title-light {
+    font-size: 46px;
+    line-height: 50px;
+  }
+  .projects-btn {
+    padding: 12px 28px;
+  }
+}
+
+/* Mobile (≤480px) */
+@media (max-width: 480px) {
+  .projects-header {
+    padding: 10px 24px;
+  }
+  .projects-title {
+    flex-direction: row;
+    gap: 6px;
+  }
+  .projects-title-bold,
+  .projects-title-light {
+    font-size: 28px;
+    line-height: 42px;
+  }
+  .projects-btn {
+    width: 40%;
+    text-align: center;
+    padding: 14px 0;
+    font-size: 10px;
+    margin-left: 200px;
+    margin-top: -70px;
+  }
+}
