@@ -55,25 +55,25 @@ const Navbar = () => {
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
         <nav className="nav-links mobile-nav">
-          <a href="#about" onClick={() => setMenuOpen(false)}>
+          <a href="about" onClick={() => setMenuOpen(false)}>
             {t("about")}
           </a>
-          <a href="#projects" onClick={() => setMenuOpen(false)}>
+          <a href="projects" onClick={() => setMenuOpen(false)}>
             {t("projects")}
           </a>
-          <a href="#catalog" onClick={() => setMenuOpen(false)}>
+          <a href="CatalogPage" onClick={() => setMenuOpen(false)}>
             {t("catalog")}
           </a>
-          <a href="#furniture" onClick={() => setMenuOpen(false)}>
+          <a href="Furniture" onClick={() => setMenuOpen(false)}>
             {t("furniture")}
           </a>
-          <a href="#showroom" onClick={() => setMenuOpen(false)}>
+          <a href="Showroom" onClick={() => setMenuOpen(false)}>
             {t("showroom")}
           </a>
-          <a href="#services" onClick={() => setMenuOpen(false)}>
+          <a href="Services" onClick={() => setMenuOpen(false)}>
             {t("services")}
           </a>
-          <a href="#contacts" onClick={() => setMenuOpen(false)}>
+          <a href="Contacts" onClick={() => setMenuOpen(false)}>
             {t("contacts")}
           </a>
 
