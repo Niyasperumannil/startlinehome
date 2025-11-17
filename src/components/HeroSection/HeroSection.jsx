@@ -1,18 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./HeroSection.css";
 
 const HeroSection = () => {
   const { t, i18n } = useTranslation();
 
+  const [heroVideo, setHeroVideo] = useState("/hero.mp4"); // default fallback
+
+  // Fetch the latest uploaded hero video from backend
+  useEffect(() => {
+    const fetchVideo = async () => {
+      try {
+        const res = await fetch("/api/admin/videos");
+        const data = await res.json();
+
+        if (Array.isArray(data) && data.length > 0) {
+          // get last uploaded video
+          const latest = data[data.length - 1];
+          setHeroVideo(latest.videoUrl);
+        }
+      } catch (error) {
+        console.error("Failed to load hero video:", error);
+      }
+    };
+
+    fetchVideo();
+  }, []);
+
   return (
     <section className={`hero-section ${i18n.language === "ar" ? "rtl" : ""}`}>
       {/* 🔹 Background Video */}
       <video className="hero-video" autoPlay loop muted playsInline>
-        <source
-          src="/hero.mp4"
-          type="video/mp4"
-        />
+        <source src={heroVideo} type="video/mp4" />
       </video>
 
       {/* 🔹 Overlay Content */}
