@@ -1,75 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ProjectGallery.css";
 
-const projects = [
-  {
-    title: "ROYAL EXPO APARTMENT",
-    size: "320 sq m",
-    img: "https://www.solomia-home.ae/storage/Project/fendi/102-kitchen-living-room-11-2560w.jpg",
-  },
-  {
-    title: "ATLANTIS THE ROYAL",
-    size: "120 sq m",
-    img: "https://www.solomia-home.ae/storage/Project/fendi/102-kitchen-living-room-11-2560w.jpg",
-  },
-  {
-    title: "ONE ZA’ABEEL DUBAI",
-    size: "890 sq m",
-    img: "https://www.solomia-home.ae/storage/Project/fendi/102-kitchen-living-room-11-2560w.jpg",
-  },
-  {
-    title: "DISTRICT ONE DUBAI",
-    size: "977 sq m",
-    img: "https://www.solomia-home.ae/storage/Project/fendi/102-kitchen-living-room-11-2560w.jpg",
-  },
-  {
-    title: "APARTMENT PALAZZO VERSACE",
-    size: "510 sq m",
-    img: "https://www.solomia-home.ae/storage/Project/fendi/102-kitchen-living-room-11-2560w.jpg",
-  },
-  {
-    title: "MIAMI VILLA",
-    size: "1150 sq m",
-    img: "https://www.solomia-home.ae/storage/Project/fendi/102-kitchen-living-room-11-2560w.jpg",
-  },
-  {
-    title: "VILLA JUMEIRAH BAY",
-    size: "2150 sq m",
-    img: "https://www.solomia-home.ae/storage/Project/fendi/102-kitchen-living-room-11-2560w.jpg",
-  },
-  {
-    title: "VILLA EMIRATES HILLS",
-    size: "1520 sq m",
-    img: "https://www.solomia-home.ae/storage/Project/fendi/102-kitchen-living-room-11-2560w.jpg",
-  },
-   {
-    title: "VILLA JUMEIRAH BAY",
-    size: "2150 sq m",
-    img: "https://www.solomia-home.ae/storage/Project/fendi/102-kitchen-living-room-11-2560w.jpg",
-  },
-  {
-    title: "VILLA EMIRATES HILLS",
-    size: "1520 sq m",
-    img: "https://www.solomia-home.ae/storage/Project/fendi/102-kitchen-living-room-11-2560w.jpg",
-  },
-    {
-    title: "VILLA JUMEIRAH BAY",
-    size: "2150 sq m",
-    img: "https://www.solomia-home.ae/storage/Project/fendi/102-kitchen-living-room-11-2560w.jpg",
-  },
-  {
-    title: "VILLA EMIRATES HILLS",
-    size: "1520 sq m",
-    img: "https://www.solomia-home.ae/storage/Project/fendi/102-kitchen-living-room-11-2560w.jpg",
-  },
-];
+const API = "http://localhost:5008";
 
 const ProjectGallery = () => {
+  const [projects, setProjects] = useState([]);
   const [visibleCount, setVisibleCount] = useState(4);
+
+  // FETCH PROJECTS FROM BACKEND
+  const fetchProjects = async () => {
+    try {
+      const res = await fetch(`${API}/api/projects/`);
+      const data = await res.json();
+
+      // Convert admin project format to frontend gallery format
+      const formatted = data.map((p) => ({
+        title: p.title,
+        size: p.subtitle || "", // use subtitle as size (same as your UI)
+        img: `${API}/uploads/projects/${p.coverImage}`, // full image path
+      }));
+
+      setProjects(formatted);
+    } catch (error) {
+      console.error("Failed to fetch projects:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
 
   const handleLoadMore = () => {
     setVisibleCount(projects.length);
-    // Optional: smooth scroll to new items
+
     setTimeout(() => {
       const lastCard = document.querySelector(".gallery-card:last-child");
       lastCard?.scrollIntoView({ behavior: "smooth" });
@@ -86,6 +49,7 @@ const ProjectGallery = () => {
             style={{ animationDelay: `${index * 100}ms` }}
           >
             <img src={item.img} alt={item.title} className="gallery-image" />
+
             <div className="gallery-info">
               <h3 className="gallery-title">{item.title}</h3>
               <p className="gallery-size">{item.size}</p>

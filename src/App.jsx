@@ -10,31 +10,38 @@ import ShowroomPage from "./pages/ShowroomPage/ShowroomPage";
 import ServicesPage from "./pages/ServicesPage/ServicesPage";
 import ContactsPage from "./pages/ContactsPage/ContactsPage";
 
+import ProjectDetail from "./pages/ProjectDetails/ProjectDetails.jsx";
+
 import AdminLogin from "./components/AdminPage/AdminLogin/AdminLogin";
 import AdminProfile from "./components/AdminPage/AdminProfile/AdminProfile";
 
 import useToken from "./utils/useToken";
-import ProtectedRoute from './components/ProtectedRoute.jsx';
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 export default function App() {
   const { token, setToken, clearToken } = useToken();
 
   return (
     <Routes>
+
       {/* Public pages */}
       <Route path="/" element={<Hero />} />
       <Route path="/about" element={<AboutPage />} />
+
+      {/* Projects */}
       <Route path="/projects" element={<ProjectsPage />} />
+      <Route path="/projects/:id" element={<ProjectDetail />} />
+
       <Route path="/CatalogPage" element={<CatalogPage />} />
       <Route path="/Furniture" element={<FurniturePage />} />
       <Route path="/Showroom" element={<ShowroomPage />} />
       <Route path="/Services" element={<ServicesPage />} />
       <Route path="/Contacts" element={<ContactsPage />} />
 
-      {/* Admin Login */}
+      {/* Admin */}
       <Route path="/AdminLogin" element={<AdminLogin setToken={setToken} />} />
 
-      {/* Protected Admin Page */}
+      {/* PROTECTED ROUTE */}
       <Route
         path="/AdminMain"
         element={

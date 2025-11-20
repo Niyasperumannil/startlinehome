@@ -1,0 +1,36 @@
+.project-detail-section {
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  background: #fafafa;
+}
+
+.project-detail-container {
+  max-width: 900px;
+}
+
+.project-detail-title {
+  font-size: 42px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+.project-detail-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.project-detail-description {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
+  white-space: pre-line;
+}
+
+.not-found {
+  padding: 50px;
+  text-align: center;
+}

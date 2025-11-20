@@ -71,7 +71,10 @@ body {
   align-items: center;
   gap: 30px;
 }
-
+.logo-img {
+width: 150px;
+height: auto;
+}
 .talk-btn {
   display: flex;
   align-items: center;

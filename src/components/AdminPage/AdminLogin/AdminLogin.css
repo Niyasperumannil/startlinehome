@@ -1,0 +1,102 @@
+/* Full page center alignment */
+.login-container {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Login card */
+.login-box {
+  background: #ffffff10;
+  backdrop-filter: blur(12px);
+  padding: 40px 50px;
+  border-radius: 18px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.2);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Starline Branding */
+.company-title {
+  font-size: 32px;
+  margin-bottom: 5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  background: linear-gradient(45deg, #ffb300, #ffc947, #ffe082);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-transform: uppercase;
+}
+
+/* Admin Login heading */
+.login-title {
+  margin-bottom: 25px;
+  font-size: 20px;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+/* Inputs */
+.login-input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 12px 0;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  transition: 0.3s;
+}
+
+.login-input::placeholder {
+  color: #ddd;
+}
+
+.login-input:focus {
+  background: rgba(255,255,255,0.3);
+  box-shadow: 0 0 0 2px #ffc947;
+}
+
+/* Button */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #ffb300, #ffca28);
+  color: #000;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background: linear-gradient(45deg, #ffca28, #ffd54f);
+  transform: translateY(-2px);
+}
+
+/* Error message */
+.error-msg {
+  color: #ff6b6b;
+  background: rgba(255,0,0,0.1);
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

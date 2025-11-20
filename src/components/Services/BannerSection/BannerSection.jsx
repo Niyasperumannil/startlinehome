@@ -11,7 +11,7 @@ const BannerSection = () => {
           alt="Solomia Home Banner"
         />
         <div className="banner-hero__text">
-          <h1>Solomia Home</h1>
+          <h1>Starline Home</h1>
         </div>
       </section>
     </div>

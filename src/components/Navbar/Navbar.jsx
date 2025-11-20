@@ -19,8 +19,11 @@ const Navbar = () => {
   return (
     <header className="navbar">
       <div className="navbar-container">
-        <div className="logo">{t("logo")}</div>
-        <button className="lang-btn mobile-lang-btn" onClick={toggleLanguage}>
+<div className="logo">
+<a href="/">
+<img src='/logo.png' alt="Logo" className="logo-img" />
+</a>
+</div><button className="lang-btn mobile-lang-btn" onClick={toggleLanguage}>
               {i18n.language === "en" ? t("lang_ar") : t("lang_en")}
             </button>
         {/* Hamburger Button */}

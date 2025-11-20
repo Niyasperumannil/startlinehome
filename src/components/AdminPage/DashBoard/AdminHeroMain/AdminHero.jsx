@@ -8,9 +8,6 @@ import "./AdminHero.css";
 // For LOCAL development:
 const API = "http://localhost:5008";
 
-// For VPS production:
-// const API = "http://YOUR_SERVER_IP:5008";   // <--- REPLACE THIS
-
 // -------------------------------------------
 
 export default function AdminHero() {
@@ -114,63 +111,149 @@ export default function AdminHero() {
   };
 
   return (
-    <div className="hero-admin-container">
-      <h2 className="heading">Admin Hero Section</h2>
+    <div
+      style={{
+        padding: "30px",
+        fontFamily: "Arial",
+        background: "#eef2f3",
+        minHeight: "100vh",
+      }}
+    >
+      <h2 style={{ marginBottom: 25 }}>Admin Hero Section</h2>
 
-      <form className="hero-form" onSubmit={hero ? handleUpdate : handleAdd}>
-        <label>Title</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
+      {/* MAIN 2-COLUMN LAYOUT */}
+      <div
+        style={{
+          display: "flex",
+          gap: "25px",
+        }}
+      >
+        {/* LEFT SIDE – VIDEO PREVIEW */}
+        <div
+          style={{
+            flex: 1,
+            background: "white",
+            padding: "20px",
+            borderRadius: 12,
+            boxShadow: "0 2px 15px rgba(0,0,0,0.1)",
+            textAlign: "center",
+          }}
+        >
+          <h3 style={{ marginBottom: 15 }}>Current Video</h3>
 
-        <label>Subtitle</label>
-        <input
-          type="text"
-          value={subtitle}
-          onChange={(e) => setSubtitle(e.target.value)}
-          required
-        />
+          {hero?.videoUrl ? (
+            <video
+              width="100%"
+              controls
+              style={{
+                borderRadius: 10,
+                border: "1px solid #ddd",
+                maxHeight: 300,
+                objectFit: "cover",
+              }}
+              src={`${API}${hero.videoUrl}`}
+            ></video>
+          ) : (
+            <p style={{ color: "#777" }}>No video uploaded</p>
+          )}
+        </div>
 
-        <label>Location</label>
-        <input
-          type="text"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          required
-        />
+        {/* RIGHT SIDE – FORM */}
+        <div
+          style={{
+            flex: 1.2,
+            background: "white",
+            padding: "25px",
+            borderRadius: 12,
+            boxShadow: "0 2px 15px rgba(0,0,0,0.1)",
+          }}
+        >
+          <h3 style={{ marginBottom: 20 }}>
+            {hero ? "Update Hero" : "Add Hero"}
+          </h3>
 
-        <label>Size</label>
-        <input
-          type="text"
-          value={size}
-          onChange={(e) => setSize(e.target.value)}
-          required
-        />
+          <form onSubmit={hero ? handleUpdate : handleAdd}>
+            <label>Title</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+              style={inputStyle}
+            />
 
-        <label>Upload Video</label>
-        <input
-          type="file"
-          accept="video/*"
-          onChange={(e) => setVideo(e.target.files[0])}
-          className="file-input"
-        />
+            <label>Subtitle</label>
+            <input
+              type="text"
+              value={subtitle}
+              onChange={(e) => setSubtitle(e.target.value)}
+              required
+              style={inputStyle}
+            />
 
-        {hero?.videoUrl && (
-          <video
-            width="350"
-            controls
-            className="video-preview"
-            src={`${API}${hero.videoUrl}`}
-          ></video>
-        )}
+            <label>Location</label>
+            <input
+              type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              required
+              style={inputStyle}
+            />
 
-        <button className="btn" disabled={loading}>
-          {loading ? "Please Wait..." : hero ? "Update Hero" : "Add Hero"}
-        </button>
-      </form>
+            <label>Size</label>
+            <input
+              type="text"
+              value={size}
+              onChange={(e) => setSize(e.target.value)}
+              required
+              style={inputStyle}
+            />
+
+            <label>Upload Video</label>
+            <input
+              type="file"
+              accept="video/*"
+              onChange={(e) => setVideo(e.target.files[0])}
+              style={{
+                marginBottom: 20,
+                padding: "10px",
+                borderRadius: 6,
+              }}
+            />
+
+            <button
+              style={btnPrimary}
+              disabled={loading}
+            >
+              {loading
+                ? "Please Wait..."
+                : hero
+                ? "Update Hero"
+                : "Add Hero"}
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
+
+/* UI Styles */
+const inputStyle = {
+  width: "100%",
+  padding: "12px",
+  marginBottom: "15px",
+  border: "1px solid #ccc",
+  borderRadius: "6px",
+};
+
+const btnPrimary = {
+  width: "100%",
+  background: "#0d6efd",
+  color: "white",
+  padding: "12px 0",
+  border: "none",
+  borderRadius: 6,
+  fontSize: 16,
+  cursor: "pointer",
+};

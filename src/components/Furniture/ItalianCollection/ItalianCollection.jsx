@@ -1,43 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ItalianCollection.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-const PRODUCTS = [
-  {
-    id: 1,
-    name: "BURTON",
-    title: "Burton Sofa",
-    brand: "Frigerio",
-    price: "From 24,000 AED",
-    img: "https://www.solomia-home.ae/storage/frigerio/frigerio-burton-1-640w.jpg"
-  },
-  {
-    id: 2,
-    name: "VERSACE GALAXY SUSPENSION",
-    title: "Versace Galaxy Suspension",
-    brand: "Versace Home",
-    price: "From 5,300 AED",
-    img: "https://www.solomia-home.ae/storage/Versace%20Home/versace-galaxy-suspension/versace-home-versace-galaxy-suspension-lamp-01-off.jpg"
-  },
-  {
-    id: 3,
-    name: "HAREM ARMCHAIR",
-    title: "Harem Armchair",
-    brand: "Versace Home",
-    price: "From 3,400 AED",
-    img: "https://www.solomia-home.ae/storage/Versace%20Home/haremarmchair/versace-home-harem-armchair-aqua.webp"
-  },
-  {
-    id: 4,
-    name: "ACANTHO ARMCHAIR",
-    title: "Acantho Armchair",
-    brand: "Versace Home",
-    price: "From 2,700 AED",
-    img: "https://www.solomia-home.ae/storage/Versace%20Home/acanthoarmchair/versace-home-acantho-armchair.jpg"
-  }
-];
-
 export default function ItalianCollection() {
+  const [items, setItems] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [search, setSearch] = useState("");
+
+  const API = "http://localhost:5008/api/furniture";
+
+  // Fetch furniture from backend
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch(API);
+        const data = await res.json();
+        setItems(data);
+        setFiltered(data);
+      } catch (err) {
+        console.error("Failed to fetch furniture", err);
+      }
+    };
+    load();
+  }, []);
+
+  // Search filter
+  useEffect(() => {
+    const s = search.toLowerCase();
+    const f = items.filter(
+      (p) =>
+        p.name?.toLowerCase().includes(s) ||
+        p.title?.toLowerCase().includes(s) ||
+        p.brand?.toLowerCase().includes(s)
+    );
+    setFiltered(f);
+  }, [search, items]);
+
   return (
     <div className="italian-collection">
       {/* Header / Title */}
@@ -47,19 +45,21 @@ export default function ItalianCollection() {
         {/* Search + Filters */}
         <div className="ic-controls">
           <div className="ic-search-wrap">
-<span className="ic-search-icon">
-  <i className="fas fa-search"></i>
-</span>
+            <span className="ic-search-icon">
+              <i className="fas fa-search"></i>
+            </span>
+
             <input
               className="ic-search"
               type="text"
               placeholder="Find italian furniture"
               aria-label="Find italian furniture"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
           </div>
 
           <div className="ic-chips">
-            {/* category chips — keep some examples, change as needed */}
             {[
               "Ottomans",
               "Chairs",
@@ -71,7 +71,7 @@ export default function ItalianCollection() {
               "Armchairs",
               "Stools",
               "Finishes",
-              "Sofas"
+              "Sofas",
             ].map((c) => (
               <button key={c} className="ic-chip">
                 {c}
@@ -104,10 +104,14 @@ export default function ItalianCollection() {
       {/* Product Grid */}
       <main className="ic-grid-wrap">
         <div className="ic-grid">
-          {PRODUCTS.map((p) => (
-            <article className="ic-card" key={p.id}>
+          {filtered.map((p) => (
+            <article className="ic-card" key={p._id}>
               <div className="ic-image-wrap">
-                <img src={p.img} alt={p.title} className="ic-image" />
+                <img
+                  src={`http://localhost:5008${p.img}`}
+                  alt={p.title}
+                  className="ic-image"
+                />
               </div>
 
               <div className="ic-card-footer">
@@ -121,7 +125,7 @@ export default function ItalianCollection() {
 
                 <div className="ic-card-actions">
                   <button className="ic-more">MORE INFO</button>
-                  <button className="ic-add">ADD TO CART</button>
+                  <button className="ic-add">BOOK NOW</button>
                 </div>
               </div>
             </article>

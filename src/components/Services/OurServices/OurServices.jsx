@@ -1,60 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./OurServices.css";
 
+const API = "http://localhost:5008";
+
 const OurServices = () => {
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    fetchServices();
+  }, []);
+
+  const fetchServices = async () => {
+    try {
+      const res = await fetch(`${API}/api/services/`);
+      const data = await res.json();
+      setServices(data);
+    } catch (error) {
+      console.log("SERVICE FETCH ERROR:", error);
+    }
+  };
+
   return (
     <div className="services-container">
       <section className="services-header">
         <h1>Our services</h1>
       </section>
 
-      {/* Versace Section */}
-      <section className="service-block service-card-versace">
-        <div className="service-text versace-text">
-          <h2>
-            Solomia Home® – official dealer Versace Home® in Dubai
-          </h2>
-          <p>
-            Versace Home furniture and accessories are a stunning blend of the
-            brand's history, fashion, heritage, and distinctive graphic elements
-            that embody its philosophy. They are not just pieces of furniture,
-            but a complete lifestyle. Versace Home furniture and accessories are
-            designed with unparalleled taste and meticulous attention to detail,
-            enriching and elevating spaces. Each piece in this collection is
-            capable of adding a unique rhythm to an environment, giving interior
-            design exceptional depth and elegance.
-          </p>
-          <button className="read-more-btn versace-btn">READ MORE</button>
-        </div>
-        <div className="service-image versace-image">
-          <img
-            src="https://www.solomia-home.ae/storage/uploads/2024/05/Black-White-jL1D0ddNrr8qFeau-960w.jpg"
-            alt="Versace Home"
-          />
-        </div>
-      </section>
+      {/* ✔ Display first service block */}
+      {services[0] && (
+        <section className="service-block service-card-versace">
+          <div className="service-text versace-text">
+            <h2>{services[0].title}</h2>
+            <p>{services[0].description}</p>
+            <button className="read-more-btn versace-btn">READ MORE</button>
+          </div>
 
-      {/* Luxury Furniture Section */}
-      <section className="service-block service-card-furniture">
-        <div className="service-image furniture-image">
-          <img
-            src="https://www.solomia-home.ae/storage/uploads/2024/05/Black-White-jL1D0ddNrr8qFeau-960w.jpg"
-            alt="Luxury Furniture"
-          />
-        </div>
-        <div className="service-text furniture-text">
-          <h2>Luxury Furniture</h2>
-          <p>
-            Our company is an exclusive representative of the best Italian
-            factories that have won recognition worldwide. Limited collections of
-            brands from Henge to Versace combine elegance, style and impeccable
-            quality with the distinctive mark of made in Italy, which allows you
-            to create exclusive interiors that meet the most demanding tastes and
-            remain timelessly relevant.
-          </p>
-          <button className="read-more-btn furniture-btn">READ MORE</button>
-        </div>
-      </section>
+          <div className="service-image versace-image">
+            <img
+              src={`${API}${services[0].image}`}
+              alt={services[0].title}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* ✔ Display second service block */}
+      {services[1] && (
+        <section className="service-block service-card-furniture">
+          <div className="service-image furniture-image">
+            <img
+              src={`${API}${services[1].image}`}
+              alt={services[1].title}
+            />
+          </div>
+
+          <div className="service-text furniture-text">
+            <h2>{services[1].title}</h2>
+            <p>{services[1].description}</p>
+            <button className="read-more-btn furniture-btn">READ MORE</button>
+          </div>
+        </section>
+      )}
     </div>
   );
 };

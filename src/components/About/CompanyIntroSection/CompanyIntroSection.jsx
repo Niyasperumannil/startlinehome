@@ -29,7 +29,7 @@ const CompanyIntroSection = () => {
       <div className="ci-left">
         <h1 className="ci-title">
           About <br />
-          <span className="ci-highlight">Solomia</span> home
+          <span className="ci-highlight">Starline</span> home
         </h1>
 
         <p className="ci-paragraph">

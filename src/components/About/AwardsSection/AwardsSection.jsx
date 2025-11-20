@@ -6,7 +6,7 @@ export default function AwardsSection() {
     <section className="awards-wrapper">
       <div className="awards-container">
         <h1 className="awards-title">
-          Solomia <br />
+          Starline <br />
           <span className="awards-light">home awards</span>
         </h1>
 
