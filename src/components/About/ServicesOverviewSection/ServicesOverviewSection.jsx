@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ServicesOverviewSection.css";
 import axios from "axios";
 
-const API = "https://starlinegroup.ae/";
+const API = "http://157.173.219.218:5008";
 
 const ServicesOverviewSection = () => {
   const [services, setServices] = useState([]);

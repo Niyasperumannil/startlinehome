@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+const API = "https://starlinegroup.ae/api";
+
 export default function AddNews() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -11,14 +13,13 @@ export default function AddNews() {
   const [newsList, setNewsList] = useState([]);
   const [search, setSearch] = useState("");
 
-  // Load all news
   useEffect(() => {
     fetchNews();
   }, []);
 
   const fetchNews = async () => {
     try {
-      const res = await axios.get("http://starlinegroup.ae:5008/api/news/");
+      const res = await axios.get(`${API}/news/`);
       setNewsList(res.data);
     } catch (error) {
       console.log("FETCH NEWS ERROR:", error);
@@ -36,7 +37,7 @@ export default function AddNews() {
     if (!window.confirm("Delete this news?")) return;
 
     try {
-      await axios.delete(`http://starlinegroup.ae:5008/api/news/${id}`, {
+      await axios.delete(`${API}/news/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -62,7 +63,7 @@ export default function AddNews() {
     formData.append("image", file);
 
     try {
-      await axios.post("http://starlinegroup.ae:5008/api/news/create", formData, {
+      await axios.post(`${API}/news/create`, formData, {
         headers: {
           Authorization: `Bearer ${TOKEN}`,
           "Content-Type": "multipart/form-data",
@@ -115,9 +116,9 @@ export default function AddNews() {
         </button>
       </div>
 
-      {/* MAIN 2-COLUMN LAYOUT */}
+      {/* MAIN CONTENT */}
       <div style={{ display: "flex", gap: "25px" }}>
-        {/* LEFT PANEL — NEWS LIST */}
+        {/* LEFT PANEL */}
         <div style={leftCard}>
           <h2 style={sectionTitle}>News List</h2>
 
@@ -141,7 +142,7 @@ export default function AddNews() {
                   <tr key={item._id} style={rowStyle}>
                     <td style={tdStyle}>
                       <img
-                        src={`http://starlinegroup.ae:5008${item.image}`}
+                        src={`https://starlinegroup.ae${item.image}`}
                         alt=""
                         style={{
                           width: 60,
@@ -170,7 +171,7 @@ export default function AddNews() {
           )}
         </div>
 
-        {/* RIGHT PANEL — ADD FORM */}
+        {/* RIGHT PANEL */}
         <div style={rightCard}>
           <h2 style={sectionTitle}>Add News</h2>
 
@@ -228,8 +229,8 @@ export default function AddNews() {
   );
 }
 
-/* ************* UI STYLES ************* */
 
+/* STYLES */
 const topButton = {
   padding: "10px 18px",
   borderRadius: 6,

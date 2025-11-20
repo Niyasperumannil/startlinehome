@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./AdminMessages.css";
 
-const API = "http://157.173.219.218:5008/api/contact";
+const API = "https://starlinegroup.ae/api";   // ✅ FIXED
 
 export default function AdminMessages() {
   const [messages, setMessages] = useState([]);
@@ -14,7 +14,7 @@ export default function AdminMessages() {
   // Fetch all messages
   const loadMessages = async () => {
     try {
-      const res = await axios.get(API);
+      const res = await axios.get(`${API}/contact`);
       setMessages(res.data);
     } catch (err) {
       console.error("Load Error:", err);
@@ -24,7 +24,7 @@ export default function AdminMessages() {
   // Mark as read
   const markRead = async (id) => {
     try {
-      await axios.put(`${API}/read/${id}`);
+      await axios.put(`${API}/contact/read/${id}`);
       loadMessages();
     } catch (err) {
       console.error("Mark Read Error:", err);
@@ -36,7 +36,7 @@ export default function AdminMessages() {
     if (!window.confirm("Delete this message?")) return;
 
     try {
-      await axios.delete(`${API}/${id}`);
+      await axios.delete(`${API}/contact/${id}`);
       loadMessages();
     } catch (err) {
       console.error("Delete Error:", err);

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import "./AdminLogin.css"; // ✅ Add CSS file
+import "./AdminLogin.css";
+
+const API = "https://starlinegroup.ae/api"; // ✅ FIXED API BASE URL
 
 export default function AdminLogin({ setToken }) {
   const [username, setUsername] = useState("");
@@ -9,20 +11,24 @@ export default function AdminLogin({ setToken }) {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("http://157.173.219.218:5008/api/admin/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password })
-    });
+    try {
+      const res = await fetch(`${API}/admin/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (res.ok) {
-      localStorage.setItem("adminToken", data.token);
-      setToken(data.token);
-      window.location.href = "/AdminMain";
-    } else {
-      setMsg(data.message);
+      if (res.ok) {
+        localStorage.setItem("adminToken", data.token);
+        setToken(data.token);
+        window.location.href = "/AdminMain";
+      } else {
+        setMsg(data.message || "Login failed");
+      }
+    } catch (error) {
+      setMsg("Server unreachable");
     }
   };
 
@@ -39,6 +45,7 @@ export default function AdminLogin({ setToken }) {
             type="text"
             placeholder="Username"
             className="login-input"
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
@@ -47,6 +54,7 @@ export default function AdminLogin({ setToken }) {
             type="password"
             placeholder="Password"
             className="login-input"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
