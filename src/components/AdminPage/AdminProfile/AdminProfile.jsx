@@ -37,7 +37,7 @@ const AdminProfile = ({ token, clearToken }) => {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5008/api/admin/profile", {
+    fetch("http://157.173.219.218:5008/api/admin/profile", {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => res.json())
@@ -190,7 +190,7 @@ const Dashboard = ({ token, clearToken }) => {
   // 🔥 Fetch unread message count every 3 seconds
   useEffect(() => {
     const fetchUnread = () => {
-      fetch("http://localhost:5008/api/contact/notifications")
+      fetch("http://157.173.219.218:5008/api/contact/notifications")
         .then(res => res.json())
         .then(data => setUnreadMessages(data.unread || 0))
         .catch(() => {});

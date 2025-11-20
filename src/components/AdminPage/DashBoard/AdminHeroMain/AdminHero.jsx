@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import "./AdminHero.css";
 
 // -------------------------------------------
-// 🔗 BACKEND URL — CHANGE ONLY THIS
+// 🔗 BACKEND URL — ONLY THIS UPDATED
 // -------------------------------------------
 
-// For LOCAL development:
-const API = "http://localhost:5008";
+// For VPS production:
+const API = "http://157.173.219.218:5008";
 
 // -------------------------------------------
 

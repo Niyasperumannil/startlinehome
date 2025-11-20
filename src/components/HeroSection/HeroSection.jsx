@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./HeroSection.css";
 
-const API = "http://localhost:5008"; // <-- FULL BACKEND URL
+const API = "http://157.173.219.218:5008"; // <-- UPDATED BACKEND URL
 
 const HeroSection = () => {
   const { t, i18n } = useTranslation();

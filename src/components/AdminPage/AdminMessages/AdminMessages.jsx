@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./AdminMessages.css";
 
-const API = "http://localhost:5008/api/contact";
+const API = "http://157.173.219.218:5008/api/contact";
 
 export default function AdminMessages() {
   const [messages, setMessages] = useState([]);

@@ -7,7 +7,7 @@ export default function ItalianCollection() {
   const [filtered, setFiltered] = useState([]);
   const [search, setSearch] = useState("");
 
-  const API = "http://localhost:5008/api/furniture";
+  const API = "http://157.173.219.218:5008/api/furniture"; // ✅ UPDATED VPS URL
 
   // Fetch furniture from backend
   useEffect(() => {
@@ -108,7 +108,7 @@ export default function ItalianCollection() {
             <article className="ic-card" key={p._id}>
               <div className="ic-image-wrap">
                 <img
-                  src={`http://localhost:5008${p.img}`}
+                  src={`http://157.173.219.218:5008${p.img}`} // ✅ UPDATED VPS IMAGE PATH
                   alt={p.title}
                   className="ic-image"
                 />

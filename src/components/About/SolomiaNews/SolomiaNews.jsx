@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./SolomiaNews.css";
 import axios from "axios";
 
+const API = "http://157.173.219.218:5008";
+
 export default function SolomiaNews() {
   const marqueeRef = useRef(null);
   const navigate = useNavigate();
@@ -16,7 +18,7 @@ export default function SolomiaNews() {
 
   const fetchNews = async () => {
     try {
-      const res = await axios.get("http://localhost:5008/api/news/");
+      const res = await axios.get(`${API}/api/news/`);
       setNewsItems(res.data);
     } catch (error) {
       console.log("FETCH NEWS ERROR:", error);
@@ -71,7 +73,7 @@ export default function SolomiaNews() {
             onClick={() => handleCardClick(item._id)}
           >
             <img
-              src={`http://localhost:5008${item.image}`}
+              src={`${API}${item.image}`}
               alt={item.title}
               className="news-img"
             />

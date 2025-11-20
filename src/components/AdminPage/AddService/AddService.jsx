@@ -15,7 +15,7 @@ export default function AddService() {
 
   const fetchServices = async () => {
     try {
-      const res = await axios.get("http://localhost:5008/api/services/");
+      const res = await axios.get("http://157.173.219.218:5008/api/services/");
       setServices(res.data);
     } catch (error) {
       console.log("FETCH ERROR:", error);
@@ -28,7 +28,7 @@ export default function AddService() {
     if (!window.confirm("Delete this service?")) return;
 
     try {
-      await axios.delete(`http://localhost:5008/api/services/${id}`, {
+      await axios.delete(`http://157.173.219.218:5008/api/services/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchServices();
@@ -52,7 +52,7 @@ export default function AddService() {
     formData.append("image", file);
 
     try {
-      await axios.post("http://localhost:5008/api/services/create", formData, {
+      await axios.post("http://157.173.219.218:5008/api/services/create", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -120,7 +120,7 @@ export default function AddService() {
                     <tr key={srv._id} style={row}>
                       <td style={td}>
                         <img
-                          src={`http://localhost:5008${srv.image}`}
+                          src={`http://157.173.219.218:5008${srv.image}`}
                           style={{
                             width: 60,
                             height: 60,
@@ -204,7 +204,7 @@ export default function AddService() {
   );
 }
 
-/* Styles to match screenshot */
+/* Styles */
 const input = {
   width: "100%",
   padding: "12px",

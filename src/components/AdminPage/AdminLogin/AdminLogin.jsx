@@ -9,7 +9,7 @@ export default function AdminLogin({ setToken }) {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:5008/api/admin/login", {
+    const res = await fetch("http://157.173.219.218:5008/api/admin/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password })

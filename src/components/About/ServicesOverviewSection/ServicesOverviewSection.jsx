@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./ServicesOverviewSection.css";
 import axios from "axios";
 
+const API = "http://157.173.219.218:5008";
+
 const ServicesOverviewSection = () => {
   const [services, setServices] = useState([]);
 
@@ -11,7 +13,7 @@ const ServicesOverviewSection = () => {
 
   const fetchServices = async () => {
     try {
-      const res = await axios.get("http://localhost:5008/api/services/");
+      const res = await axios.get(`${API}/api/services/`);
       setServices(res.data);
     } catch (error) {
       console.log("FETCH ERROR:", error);
@@ -36,7 +38,7 @@ const ServicesOverviewSection = () => {
             className={`fade-card delay${index + 1} so-card${index + 1}`}
           >
             <img
-              src={`http://localhost:5008${srv.image}`}
+              src={`${API}${srv.image}`}
               alt={srv.title}
               className={`so-card${index + 1}Img`}
             />

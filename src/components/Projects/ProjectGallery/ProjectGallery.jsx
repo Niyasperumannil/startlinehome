@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ProjectGallery.css";
 
-const API = "http://localhost:5008";
+const API = "http://157.173.219.218:5008"; // <-- UPDATED BACKEND URL
 
 const ProjectGallery = () => {
   const [projects, setProjects] = useState([]);
@@ -16,8 +16,8 @@ const ProjectGallery = () => {
       // Convert admin project format to frontend gallery format
       const formatted = data.map((p) => ({
         title: p.title,
-        size: p.subtitle || "", // use subtitle as size (same as your UI)
-        img: `${API}/uploads/projects/${p.coverImage}`, // full image path
+        size: p.subtitle || "", // use subtitle as size
+        img: `${API}/uploads/projects/${p.coverImage}`, // full image URL
       }));
 
       setProjects(formatted);

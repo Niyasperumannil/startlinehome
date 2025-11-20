@@ -4,12 +4,12 @@ import axios from "axios";
 
 /*
   Single-file Furniture CRUD Admin UI
-  - Backend expected at: http://localhost:5008/api/furniture
+  - Backend expected at: http://157.173.219.218:5008/api/furniture
   - Token read from localStorage key: "adminToken"
   - Image upload uses FormData with field name "img" (matches backend middleware)
 */
 
-const API_BASE = "http://localhost:5008/api/furniture";
+const API_BASE = "http://157.173.219.218:5008/api/furniture";
 const TOKEN_KEY = "adminToken";
 
 export default function FurnitureApp() {
@@ -29,11 +29,11 @@ export default function FurnitureApp() {
     imgFile: null, // File object
   });
 
-  const [editId, setEditId] = useState(null); // _id when editing
-  const [previewSrc, setPreviewSrc] = useState(null); // preview URL for selected image
+  const [editId, setEditId] = useState(null);
+  const [previewSrc, setPreviewSrc] = useState(null);
   const fileInputRef = useRef(null);
 
-  // Inject component CSS once
+  // Inject component CSS
   useEffect(() => {
     const css = `
       .fa-app { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; padding: 18px; max-width: 1100px; margin: 24px auto; color: #111; }
@@ -76,7 +76,6 @@ export default function FurnitureApp() {
     }
   }, []);
 
-  // Load items
   const loadItems = async () => {
     setLoading(true);
     setError(null);
@@ -94,7 +93,6 @@ export default function FurnitureApp() {
     loadItems();
   }, []);
 
-  // Handle form field change
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "imgFile") {
@@ -111,7 +109,6 @@ export default function FurnitureApp() {
     }
   };
 
-  // Validate form
   const validateForm = () => {
     if (!form.name?.trim()) return "Name is required";
     if (!form.title?.trim()) return "Title is required";
@@ -121,13 +118,11 @@ export default function FurnitureApp() {
     return null;
   };
 
-  // Compose headers with token (if present)
   const getAuthHeaders = () => {
     const token = localStorage.getItem(TOKEN_KEY);
     return token ? { Authorization: `Bearer ${token}` } : {};
   };
 
-  // Submit (create or update)
   const handleSubmit = async () => {
     setError(null);
     const v = validateForm();
@@ -161,11 +156,9 @@ export default function FurnitureApp() {
         });
       }
 
-      // success: reload
       await loadItems();
       resetForm();
     } catch (err) {
-      // show backend error message if available
       const msg = err?.response?.data?.message || "Failed to save furniture";
       setError(msg);
     } finally {
@@ -173,7 +166,6 @@ export default function FurnitureApp() {
     }
   };
 
-  // Edit an item - populate form
   const startEdit = (item) => {
     setEditId(item._id);
     setForm({
@@ -183,7 +175,9 @@ export default function FurnitureApp() {
       price: item.price || "",
       imgFile: null,
     });
-    setPreviewSrc(item.img ? `http://localhost:5008${item.img}` : null);
+
+    setPreviewSrc(item.img ? `http://157.173.219.218:5008${item.img}` : null);
+
     if (fileInputRef.current) fileInputRef.current.value = "";
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -196,7 +190,6 @@ export default function FurnitureApp() {
     setError(null);
   };
 
-  // Delete item
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this furniture item? This cannot be undone.")) return;
     try {
@@ -209,7 +202,6 @@ export default function FurnitureApp() {
     }
   };
 
-  // Filtered list by search
   const filtered = items.filter((it) => {
     const q = search.trim().toLowerCase();
     if (!q) return true;
@@ -243,7 +235,6 @@ export default function FurnitureApp() {
       </div>
 
       <div className="fa-grid">
-        {/* LEFT: list */}
         <div className="fa-list fa-panel">
           <h3 style={{ marginTop: 0, marginBottom: 8 }}>Furniture List {loading ? " (loading...)" : ""}</h3>
 
@@ -257,7 +248,7 @@ export default function FurnitureApp() {
 
           {!loading && filtered.map((it) => (
             <div className="fa-item" key={it._id}>
-              <img className="fa-thumb" alt={it.title} src={it.img ? `http://localhost:5008${it.img}` : undefined} />
+              <img className="fa-thumb" alt={it.title} src={it.img ? `http://157.173.219.218:5008${it.img}` : undefined} />
 
               <div className="fa-meta">
                 <div className="fa-name">{it.name}</div>
@@ -274,7 +265,6 @@ export default function FurnitureApp() {
           ))}
         </div>
 
-        {/* RIGHT: form panel */}
         <div className="fa-panel">
           <h3 style={{ marginTop: 0 }}>{editId ? "Edit Furniture" : "Add Furniture"}</h3>
 

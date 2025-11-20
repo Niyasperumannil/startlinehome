@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+const API = "http://157.173.219.218:5008"; // ✅ UPDATED API
+
 export default function AddProject() {
   const [token, setToken] = useState("");
   const [projects, setProjects] = useState([]);
@@ -25,7 +27,7 @@ export default function AddProject() {
   // FETCH PROJECT LIST
   const fetchProjects = async () => {
     try {
-      const res = await axios.get("http://localhost:5008/api/projects/");
+      const res = await axios.get(`${API}/api/projects/`);
       setProjects(res.data);
     } catch (err) {
       console.log("FETCH PROJECTS ERROR:", err);
@@ -37,7 +39,7 @@ export default function AddProject() {
     if (!window.confirm("Are you sure want to delete?")) return;
 
     try {
-      await axios.delete(`http://localhost:5008/api/projects/${id}`, {
+      await axios.delete(`${API}/api/projects/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -74,16 +76,12 @@ export default function AddProject() {
       if (coverImage) formData.append("coverImage", coverImage);
       gallery.forEach((img) => formData.append("gallery", img));
 
-      await axios.post(
-        "http://localhost:5008/api/projects/create",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.post(`${API}/api/projects/create`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       setMsg("Project Added Successfully!");
 
@@ -144,13 +142,8 @@ export default function AddProject() {
         </button>
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          gap: 20,
-          marginTop: 20,
-        }}
-      >
+      <div style={{ display: "flex", gap: 20, marginTop: 20 }}>
+
         {/* ---------- LEFT SIDE – PROJECT LIST ---------- */}
         <div
           style={{
@@ -193,7 +186,7 @@ export default function AddProject() {
                 <tr key={project._id}>
                   <td style={td}>
                     <img
-                      src={`http://localhost:5008/uploads/projects/${project.coverImage}`}
+                      src={`${API}/uploads/projects/${project.coverImage}`}
                       alt=""
                       style={{
                         width: 60,

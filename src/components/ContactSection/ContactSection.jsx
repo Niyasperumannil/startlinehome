@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import "./ContactSection.css";
 
-const API = "http://localhost:5008";
+const API = "http://157.173.219.218:5008"; // ✅ UPDATED VPS URL
 
 const ContactSection = () => {
   const { t } = useTranslation();

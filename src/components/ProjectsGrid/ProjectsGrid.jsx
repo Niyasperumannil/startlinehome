@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ProjectsGrid.css";
 
-const API = "http://localhost:5008";
+const API = "http://157.173.219.218:5008"; // <-- UPDATED BACKEND URL
 
 const ProjectsGrid = () => {
   const [projects, setProjects] = useState([]);

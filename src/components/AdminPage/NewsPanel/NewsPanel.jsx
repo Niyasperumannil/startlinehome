@@ -18,7 +18,7 @@ export default function AddNews() {
 
   const fetchNews = async () => {
     try {
-      const res = await axios.get("http://localhost:5008/api/news/");
+      const res = await axios.get("http://starlinegroup.ae:5008/api/news/");
       setNewsList(res.data);
     } catch (error) {
       console.log("FETCH NEWS ERROR:", error);
@@ -36,7 +36,7 @@ export default function AddNews() {
     if (!window.confirm("Delete this news?")) return;
 
     try {
-      await axios.delete(`http://localhost:5008/api/news/${id}`, {
+      await axios.delete(`http://starlinegroup.ae:5008/api/news/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -62,7 +62,7 @@ export default function AddNews() {
     formData.append("image", file);
 
     try {
-      await axios.post("http://localhost:5008/api/news/create", formData, {
+      await axios.post("http://starlinegroup.ae:5008/api/news/create", formData, {
         headers: {
           Authorization: `Bearer ${TOKEN}`,
           "Content-Type": "multipart/form-data",
@@ -100,10 +100,7 @@ export default function AddNews() {
           }}
         />
 
-        <button
-          onClick={fetchNews}
-          style={topButton}
-        >
+        <button onClick={fetchNews} style={topButton}>
           Refresh
         </button>
 
@@ -120,7 +117,6 @@ export default function AddNews() {
 
       {/* MAIN 2-COLUMN LAYOUT */}
       <div style={{ display: "flex", gap: "25px" }}>
-        
         {/* LEFT PANEL — NEWS LIST */}
         <div style={leftCard}>
           <h2 style={sectionTitle}>News List</h2>
@@ -145,7 +141,7 @@ export default function AddNews() {
                   <tr key={item._id} style={rowStyle}>
                     <td style={tdStyle}>
                       <img
-                        src={`http://localhost:5008${item.image}`}
+                        src={`http://starlinegroup.ae:5008${item.image}`}
                         alt=""
                         style={{
                           width: 60,
@@ -178,9 +174,7 @@ export default function AddNews() {
         <div style={rightCard}>
           <h2 style={sectionTitle}>Add News</h2>
 
-          {msg && (
-            <p style={errorBox}>{msg}</p>
-          )}
+          {msg && <p style={errorBox}>{msg}</p>}
 
           <form onSubmit={handleSubmit}>
             <input
@@ -234,7 +228,7 @@ export default function AddNews() {
   );
 }
 
-/* ************* UI STYLES (Only UI changes) ************* */
+/* ************* UI STYLES ************* */
 
 const topButton = {
   padding: "10px 18px",
@@ -251,7 +245,6 @@ const leftCard = {
   padding: "25px",
   borderRadius: 12,
   boxShadow: "0 2px 15px rgba(0,0,0,0.1)",
-  minHeight: 400,
 };
 
 const rightCard = {

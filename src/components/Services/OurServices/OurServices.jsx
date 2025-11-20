@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./OurServices.css";
 
-const API = "http://localhost:5008";
+const API = "http://157.173.219.218:5008"; // UPDATED API
 
 const OurServices = () => {
   const [services, setServices] = useState([]);
