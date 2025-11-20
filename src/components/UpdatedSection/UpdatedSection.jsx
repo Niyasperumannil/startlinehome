@@ -10,11 +10,11 @@ const UpdatedSection = () => {
     <section className="us-section">
       <div className="us-inner">
         <h1 className="us-title">
-          <span className="us-titleBold">{t('about_title_line1')}</span> {t('about_title_line2_home')}
+          <span className="us-titleBold">Starline</span> {t('about_title_line2_home')}
         </h1>
         <p className="us-text">
           {/* If you want the “Versace Home” link text to be translated */}
-          <a href="#" className="us-link">{t('logo')}</a> {t('about_paragraph1')}
+          <a href="#" className="us-link">{t('logo')}</a>Starline{t('about_paragraph1')}
         </p>
       </div>
       <div className="us-buttonGroup">

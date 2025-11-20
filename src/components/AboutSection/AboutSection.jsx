@@ -12,7 +12,7 @@ const AboutSection = () => {
         {/* ===== Left Text ===== */}
         <div className="about-text">
           <h2 className="about-title">
-            <span className="line1">{t("about_title_line1")}</span>
+            <span className="line1">Starline</span>
             <br />
             <span className="line2">
               <span>{t("about_title_line2_home")} </span>
