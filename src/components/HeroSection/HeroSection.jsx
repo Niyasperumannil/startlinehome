@@ -8,36 +8,38 @@ const HeroSection = () => {
   const { t, i18n } = useTranslation();
 
   const [heroData, setHeroData] = useState(null);
-  const [heroVideo, setHeroVideo] = useState(null);
+  const [heroVideo, setHeroVideo] = useState("/hero.mp4"); // default fallback
   const [videoError, setVideoError] = useState(false);
 
+  // Fetch hero data from backend
   useEffect(() => {
     const fetchHero = async () => {
       try {
         const res = await fetch(`${API}/api/hero`);
         if (!res.ok) throw new Error("Failed to fetch hero");
+
         const data = await res.json();
         setHeroData(data);
+
         if (data.videoUrl) {
           setHeroVideo(`${API}${data.videoUrl}`);
-        } else {
-          // fallback
-          setHeroVideo("/hero.mp4");
         }
       } catch (error) {
         console.error("Failed to load hero:", error);
-        // fallback even on error
-        setHeroVideo("/hero.mp4");
+        setHeroVideo("/hero.mp4"); // fallback on error
       }
     };
 
     fetchHero();
   }, []);
 
+  // If video fails to load, switch to fallback
   const handleVideoError = () => {
-    console.warn("Hero video failed to load, using fallback");
-    setVideoError(true);
-    setHeroVideo("/hero.mp4");
+    if (!videoError) {
+      console.warn("Hero video failed to load, using fallback video");
+      setVideoError(true);
+      setHeroVideo("/hero.mp4");
+    }
   };
 
   return (
@@ -50,23 +52,14 @@ const HeroSection = () => {
         playsInline
         onError={handleVideoError}
       >
-        {/* try to load the fetched video first */}
-        {!videoError && heroData?.videoUrl && (
-          <source src={heroVideo} type="video/mp4" />
-        )}
-        {/* fallback source */}
-        <source src="/hero.mp4" type="video/mp4" />
+        <source src={heroVideo} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
       <div className="hero-overlay">
         <div className="hero-content">
-          <h1 className="hero-title">
-            {heroData?.title || t("hero_title")}
-          </h1>
-          <p className="hero-subtitle">
-            {heroData?.subtitle || t("hero_subtitle")}
-          </p>
+          <h1 className="hero-title">{heroData?.title || t("hero_title")}</h1>
+          <p className="hero-subtitle">{heroData?.subtitle || t("hero_subtitle")}</p>
 
           <div
             className="hero-arrow"
