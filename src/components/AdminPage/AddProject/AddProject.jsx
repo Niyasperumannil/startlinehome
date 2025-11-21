@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const API = "https://starlinegroup.ae/api"; // ✅ UPDATED API BASE URL
+const API = "https://starlinegroup.ae/api";  
+const STATIC_BASE = "https://starlinegroup.ae/uploads/projects"; // base URL for static images
 
 export default function AddProject() {
   const [token, setToken] = useState("");
@@ -17,7 +18,7 @@ export default function AddProject() {
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
 
-  // Load token
+  // Load token and fetch projects once
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
     setToken(savedToken);
@@ -30,7 +31,7 @@ export default function AddProject() {
       const res = await axios.get(`${API}/projects/`);
       setProjects(res.data);
     } catch (err) {
-      console.log("FETCH PROJECTS ERROR:", err);
+      console.error("FETCH PROJECTS ERROR:", err);
     }
   };
 
@@ -44,16 +45,24 @@ export default function AddProject() {
           Authorization: `Bearer ${token}`,
         },
       });
-
       fetchProjects();
     } catch (err) {
-      console.log("DELETE ERROR:", err);
+      console.error("DELETE ERROR:", err);
     }
   };
 
   // Handle files
-  const handleCoverChange = (e) => setCoverImage(e.target.files[0]);
-  const handleGalleryChange = (e) => setGallery([...e.target.files]);
+  const handleCoverChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setCoverImage(e.target.files[0]);
+    }
+  };
+
+  const handleGalleryChange = (e) => {
+    if (e.target.files) {
+      setGallery([...e.target.files]);
+    }
+  };
 
   // SUBMIT PROJECT
   const handleSubmit = async (e) => {
@@ -73,8 +82,12 @@ export default function AddProject() {
       formData.append("subtitle", subtitle);
       formData.append("description", description);
 
-      if (coverImage) formData.append("coverImage", coverImage);
-      gallery.forEach((img) => formData.append("gallery", img));
+      if (coverImage) {
+        formData.append("coverImage", coverImage);
+      }
+      gallery.forEach((img) => {
+        formData.append("gallery", img);
+      });
 
       await axios.post(`${API}/projects/create`, formData, {
         headers: {
@@ -85,15 +98,17 @@ export default function AddProject() {
 
       setMsg("Project Added Successfully!");
 
+      // reset form
       setTitle("");
       setSubtitle("");
       setDescription("");
       setCoverImage(null);
       setGallery([]);
 
+      // reload projects
       fetchProjects();
     } catch (err) {
-      console.log("UPLOAD ERROR:", err.response?.data);
+      console.error("UPLOAD ERROR:", err.response?.data || err);
       setMsg("Error adding project!");
     }
 
@@ -102,7 +117,7 @@ export default function AddProject() {
 
   return (
     <div style={{ width: "95%", margin: "20px auto", fontFamily: "Inter" }}>
-      {/* ---------- TOP RIGHT BAR ---------- */}
+      {/* Top Right Bar */}
       <div style={{ display: "flex", justifyContent: "flex-end", gap: 10 }}>
         <input
           type="text"
@@ -136,13 +151,22 @@ export default function AddProject() {
             color: "white",
             cursor: "pointer",
           }}
+          onClick={() => {
+            // maybe scroll to form or clear form for new item
+            setTitle("");
+            setSubtitle("");
+            setDescription("");
+            setCoverImage(null);
+            setGallery([]);
+            setMsg("");
+          }}
         >
           New Item
         </button>
       </div>
 
       <div style={{ display: "flex", gap: 20, marginTop: 20 }}>
-        {/* ---------- LEFT SIDE – PROJECT LIST ---------- */}
+        {/* Left Side — Project List */}
         <div
           style={{
             flex: 1,
@@ -174,7 +198,10 @@ export default function AddProject() {
             <tbody>
               {projects.length === 0 && (
                 <tr>
-                  <td colSpan="5" style={{ padding: 20, textAlign: "center", color: "#777" }}>
+                  <td
+                    colSpan="5"
+                    style={{ padding: 20, textAlign: "center", color: "#777" }}
+                  >
                     No projects yet — add a new project.
                   </td>
                 </tr>
@@ -183,21 +210,27 @@ export default function AddProject() {
               {projects.map((project) => (
                 <tr key={project._id}>
                   <td style={td}>
-                    <img
-                      src={`${API}/uploads/projects/${project.coverImage}`}
-                      alt=""
-                      style={{
-                        width: 60,
-                        height: 60,
-                        borderRadius: 6,
-                        objectFit: "cover",
-                      }}
-                    />
+                    {project.coverImage ? (
+                      <img
+                        src={`${STATIC_BASE}/${project.coverImage}`}
+                        alt={project.title}
+                        style={{
+                          width: 60,
+                          height: 60,
+                          borderRadius: 6,
+                          objectFit: "cover",
+                        }}
+                      />
+                    ) : (
+                      <span style={{ color: "#777" }}>No image</span>
+                    )}
                   </td>
 
                   <td style={td}>{project.title}</td>
                   <td style={td}>{project.subtitle}</td>
-                  <td style={td}>{new Date(project.createdAt).toLocaleDateString()}</td>
+                  <td style={td}>
+                    {new Date(project.createdAt).toLocaleDateString()}
+                  </td>
 
                   <td style={td}>
                     <button
@@ -220,7 +253,7 @@ export default function AddProject() {
           </table>
         </div>
 
-        {/* ---------- RIGHT SIDE – ADD PROJECT FORM ---------- */}
+        {/* Right Side — Add Project Form */}
         <div
           style={{
             width: 420,
@@ -264,15 +297,21 @@ export default function AddProject() {
               style={textarea}
             />
 
-            <label style={{ marginTop: 10, display: "block", fontWeight: 600 }}>
+            <label
+              style={{ marginTop: 10, display: "block", fontWeight: 600 }}
+            >
               Cover Image
             </label>
-            <input type="file" accept="image/*" onChange={handleCoverChange} />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleCoverChange}
+            />
 
             {coverImage && (
               <img
                 src={URL.createObjectURL(coverImage)}
-                alt=""
+                alt="preview"
                 style={{
                   width: "100%",
                   marginTop: 10,
@@ -281,17 +320,31 @@ export default function AddProject() {
               />
             )}
 
-            <label style={{ marginTop: 15, display: "block", fontWeight: 600 }}>
+            <label
+              style={{ marginTop: 15, display: "block", fontWeight: 600 }}
+            >
               Gallery Images
             </label>
-            <input type="file" multiple accept="image/*" onChange={handleGalleryChange} />
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={handleGalleryChange}
+            />
 
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 10 }}>
+            <div
+              style={{
+                display: "flex",
+                gap: 10,
+                flexWrap: "wrap",
+                marginTop: 10,
+              }}
+            >
               {gallery.map((img, i) => (
                 <img
                   key={i}
                   src={URL.createObjectURL(img)}
-                  alt=""
+                  alt={`gallery-${i}`}
                   style={{
                     width: 70,
                     height: 70,
@@ -324,7 +377,7 @@ export default function AddProject() {
   );
 }
 
-/* --------- REUSABLE STYLES ---------- */
+/* Reusable Styles */
 const th = {
   padding: 12,
   textAlign: "left",

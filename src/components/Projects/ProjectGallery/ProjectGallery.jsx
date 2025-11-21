@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
 import "./ProjectGallery.css";
 
-const API = "https://starlinegroup.ae/api"; // ✅ UPDATED API ONLY
+const API = "https://starlinegroup.ae/api";  
+const STATIC_BASE = "https://starlinegroup.ae/uploads/projects"; // static path for project images
 
 const ProjectGallery = () => {
   const [projects, setProjects] = useState([]);
   const [visibleCount, setVisibleCount] = useState(4);
 
-  // FETCH PROJECTS FROM BACKEND
+  // Fetch projects from backend
   const fetchProjects = async () => {
     try {
-      const res = await fetch(`${API}/projects`); // ✅ removed extra /api/
+      const res = await fetch(`${API}/projects`);
+      if (!res.ok) throw new Error("Failed to fetch projects");
       const data = await res.json();
 
-      // Convert admin project format to frontend gallery format
       const formatted = data.map((p) => ({
         title: p.title,
         size: p.subtitle || "",
-        img: `${API}/uploads/projects/${p.coverImage}`, // full image URL
+        img: p.coverImage ? `${STATIC_BASE}/${p.coverImage}` : null,
       }));
 
       setProjects(formatted);
@@ -33,6 +34,7 @@ const ProjectGallery = () => {
   const handleLoadMore = () => {
     setVisibleCount(projects.length);
 
+    // Smooth scroll to the last card after a short delay
     setTimeout(() => {
       const lastCard = document.querySelector(".gallery-card:last-child");
       lastCard?.scrollIntoView({ behavior: "smooth" });
@@ -48,7 +50,16 @@ const ProjectGallery = () => {
             key={index}
             style={{ animationDelay: `${index * 100}ms` }}
           >
-            <img src={item.img} alt={item.title} className="gallery-image" />
+            {item.img ? (
+              <img
+                src={item.img}
+                alt={item.title}
+                className="gallery-image"
+                loading="lazy"  // native lazy-loading
+              />
+            ) : (
+              <div className="gallery-image placeholder">No Image</div>
+            )}
 
             <div className="gallery-info">
               <h3 className="gallery-title">{item.title}</h3>

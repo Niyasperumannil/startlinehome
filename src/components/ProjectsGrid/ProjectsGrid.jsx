@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from "react";
 import "./ProjectsGrid.css";
 
-const API = "https://starlinegroup.ae/api"; // <-- UPDATED API ONLY
+const API = "https://starlinegroup.ae/api";  
+const STATIC_BASE = "https://starlinegroup.ae/uploads/projects"; // base for project images
 
 const ProjectsGrid = () => {
   const [projects, setProjects] = useState([]);
-  const [selectedProject, setSelectedProject] = useState(null); // modal state
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const fetchProjects = async () => {
     try {
-      const res = await fetch(`${API}/projects`);
+      const res = await fetch(`${API}/projects`); 
+      if (!res.ok) throw new Error("Failed to fetch projects");
       const data = await res.json();
 
       const formatted = data.map((p) => ({
         id: p._id,
         title: p.title,
         subtitle: p.subtitle || "",
-        img: `${API}/uploads/projects/${p.coverImage}`,
+        coverImage: p.coverImage,
+        img: p.coverImage
+          ? `${STATIC_BASE}/${p.coverImage}`
+          : null,
       }));
 
       setProjects(formatted);
@@ -45,38 +50,48 @@ const ProjectsGrid = () => {
             <div
               className="project-card"
               key={p.id}
-              onClick={() => openModal(p)} // open modal
+              onClick={() => openModal(p)}
             >
-              <img src={p.img} alt={p.title} className="project-image" />
+              {p.img ? (
+                <img src={p.img} alt={p.title} className="project-image" />
+              ) : (
+                <div className="project-image placeholder">
+                  No Image
+                </div>
+              )}
 
               <div className="project-overlay">
                 <h3 className="project-title">{p.title}</h3>
-                {p.subtitle && <p className="project-subtitle">{p.subtitle}</p>}
+                {p.subtitle && (
+                  <p className="project-subtitle">{p.subtitle}</p>
+                )}
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 🟦 MODAL */}
       {selectedProject && (
         <div className="modal-backdrop" onClick={closeModal}>
           <div
             className="modal-content"
-            onClick={(e) => e.stopPropagation()} // prevent close when clicking inside
+            onClick={(e) => e.stopPropagation()}
           >
             <button className="modal-close-btn" onClick={closeModal}>
               ✕
             </button>
 
-            <img
-              src={selectedProject.img}
-              alt={selectedProject.title}
-              className="modal-image"
-            />
+            {selectedProject.img ? (
+              <img
+                src={selectedProject.img}
+                alt={selectedProject.title}
+                className="modal-image"
+              />
+            ) : (
+              <div className="modal-image placeholder">No Image</div>
+            )}
 
             <h2 className="modal-title">{selectedProject.title}</h2>
-
             {selectedProject.subtitle && (
               <p className="modal-subtitle">{selectedProject.subtitle}</p>
             )}

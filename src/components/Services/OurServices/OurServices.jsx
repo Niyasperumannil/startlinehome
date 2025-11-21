@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./OurServices.css";
 
-const API = "https://starlinegroup.ae/api"; // ✅ UPDATED API
+const API = "http://157.173.219.218:5008"; // UPDATED API
 
 const OurServices = () => {
   const [services, setServices] = useState([]);
@@ -12,7 +12,7 @@ const OurServices = () => {
 
   const fetchServices = async () => {
     try {
-      const res = await fetch(`${API}/services/`); // ✅ REMOVED extra /api/
+      const res = await fetch(`${API}/api/services/`);
       const data = await res.json();
       setServices(data);
     } catch (error) {

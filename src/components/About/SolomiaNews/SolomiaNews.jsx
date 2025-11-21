@@ -22,7 +22,7 @@ export default function SolomiaNews() {
       const res = await axios.get(`${API}/news/`);
       setNewsItems(res.data);
     } catch (error) {
-      console.log("FETCH NEWS ERROR:", error);
+      console.error("FETCH NEWS ERROR:", error);
     }
   };
 
@@ -73,11 +73,13 @@ export default function SolomiaNews() {
             key={item._id}
             onClick={() => handleCardClick(item._id)}
           >
-            <img
-              src={`${API}${item.image}`}
-              alt={item.title}
-              className="news-img"
-            />
+            {item.image && (
+              <img
+                src={`https://starlinegroup.ae${item.image}`}
+                alt={item.title}
+                className="news-img"
+              />
+            )}
             <p className="news-date">{item.date}</p>
             <h2 className="news-headline">{item.title}</h2>
             {item.desc && <p className="news-desc">{item.desc}</p>}
