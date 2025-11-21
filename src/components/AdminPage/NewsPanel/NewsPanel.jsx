@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-const API = "http://starlinegroup.ae/api";
+const API = "https://starlinegroup.ae/api";
 
 export default function NewsPanel() {
   const [title, setTitle] = useState("");
