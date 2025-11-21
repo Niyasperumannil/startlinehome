@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./HeroSection.css";
 
-// ✅ Updated API base (remove /api, frontend will call /api/hero)
+// ✅ Updated API base
 const API = "https://starlinegroup.ae";
 
 const HeroSection = () => {
@@ -11,17 +11,15 @@ const HeroSection = () => {
   const [heroData, setHeroData] = useState(null);
   const [heroVideo, setHeroVideo] = useState("/hero.mp4"); // fallback
 
-  // Fetch hero section from backend
   useEffect(() => {
     const fetchHero = async () => {
       try {
-        const res = await fetch(`${API}/api/hero`); // ✅ Correct endpoint
+        const res = await fetch(`${API}/api/hero`);
         if (!res.ok) throw new Error("Failed to fetch hero");
         const data = await res.json();
 
         if (data) {
           setHeroData(data);
-
           if (data.videoUrl) {
             setHeroVideo(`${API}${data.videoUrl}`);
           }
@@ -42,13 +40,9 @@ const HeroSection = () => {
 
       <div className="hero-overlay">
         <div className="hero-content">
-          <h1 className="hero-title">
-            {heroData?.title || t("hero_title")}
-          </h1>
+          <h1 className="hero-title">{heroData?.title || t("hero_title")}</h1>
 
-          <p className="hero-subtitle">
-            {heroData?.subtitle || t("hero_subtitle")}
-          </p>
+          <p className="hero-subtitle">{heroData?.subtitle || t("hero_subtitle")}</p>
 
           <div
             className="hero-arrow"
