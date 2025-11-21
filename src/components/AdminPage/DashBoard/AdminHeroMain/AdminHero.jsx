@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import "./AdminHero.css";
 
-const API = "https://starlinegroup.ae/api"; // Correct API Base
+// ✅ Updated API base (remove /api, frontend will call /api/hero)
+const API = "https://starlinegroup.ae";
 
 export default function AdminHero() {
   const [hero, setHero] = useState(null);
@@ -17,7 +18,7 @@ export default function AdminHero() {
   // Fetch Existing Hero
   const fetchHero = async () => {
     try {
-      const res = await fetch(`${API}/hero`);
+      const res = await fetch(`${API}/api/hero`);
       if (!res.ok) throw new Error("Failed to fetch hero");
 
       const data = await res.json();
@@ -50,7 +51,7 @@ export default function AdminHero() {
       formData.append("size", size);
       formData.append("video", video);
 
-      const res = await fetch(`${API}/hero`, {
+      const res = await fetch(`${API}/api/hero`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -83,7 +84,7 @@ export default function AdminHero() {
       formData.append("size", size);
       if (video) formData.append("video", video);
 
-      const res = await fetch(`${API}/hero`, {
+      const res = await fetch(`${API}/api/hero`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -105,7 +106,7 @@ export default function AdminHero() {
 
   return (
     <div style={{ padding: "30px", background: "#eef2f3", minHeight: "100vh" }}>
-      <h2>Admin Hero Section</h2>
+      <h2 style={{ marginBottom: 25 }}>Admin Hero Section</h2>
 
       <div style={{ display: "flex", gap: "25px" }}>
         {/* Current Video Section */}
@@ -119,7 +120,7 @@ export default function AdminHero() {
             textAlign: "center",
           }}
         >
-          <h3>Current Video</h3>
+          <h3 style={{ marginBottom: 15 }}>Current Video</h3>
 
           {hero?.videoUrl ? (
             <video
@@ -134,7 +135,7 @@ export default function AdminHero() {
               src={`${API}${hero.videoUrl}`}
             ></video>
           ) : (
-            <p>No video uploaded</p>
+            <p style={{ color: "#777" }}>No video uploaded</p>
           )}
         </div>
 
@@ -148,7 +149,7 @@ export default function AdminHero() {
             boxShadow: "0 2px 15px rgba(0,0,0,0.1)",
           }}
         >
-          <h3>{hero ? "Update Hero" : "Add Hero"}</h3>
+          <h3 style={{ marginBottom: 20 }}>{hero ? "Update Hero" : "Add Hero"}</h3>
 
           <form onSubmit={hero ? handleUpdate : handleAdd}>
             <label>Title</label>
@@ -192,15 +193,11 @@ export default function AdminHero() {
               type="file"
               accept="video/*"
               onChange={(e) => setVideo(e.target.files[0])}
-              style={{ marginBottom: 20 }}
+              style={{ marginBottom: 20, padding: 10, borderRadius: 6 }}
             />
 
             <button style={btnPrimary} disabled={loading}>
-              {loading
-                ? "Please Wait..."
-                : hero
-                ? "Update Hero"
-                : "Add Hero"}
+              {loading ? "Please Wait..." : hero ? "Update Hero" : "Add Hero"}
             </button>
           </form>
         </div>

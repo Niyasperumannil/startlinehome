@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./HeroSection.css";
 
-const API = "https://starlinegroup.ae/api";
+// ✅ Updated API base (remove /api, frontend will call /api/hero)
+const API = "https://starlinegroup.ae";
 
 const HeroSection = () => {
   const { t, i18n } = useTranslation();
@@ -10,10 +11,12 @@ const HeroSection = () => {
   const [heroData, setHeroData] = useState(null);
   const [heroVideo, setHeroVideo] = useState("/hero.mp4"); // fallback
 
+  // Fetch hero section from backend
   useEffect(() => {
     const fetchHero = async () => {
       try {
-        const res = await fetch(`${API}/hero`);
+        const res = await fetch(`${API}/api/hero`); // ✅ Correct endpoint
+        if (!res.ok) throw new Error("Failed to fetch hero");
         const data = await res.json();
 
         if (data) {
