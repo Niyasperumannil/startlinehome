@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./HeroSection.css";
 
-const API = "https://starlinegroup.ae/api"; // <-- UPDATED & FINAL API
+const API = "https://starlinegroup.ae/api"; // UPDATED API
 
 const HeroSection = () => {
   const { t, i18n } = useTranslation();
@@ -10,18 +10,19 @@ const HeroSection = () => {
   const [heroData, setHeroData] = useState(null);
   const [heroVideo, setHeroVideo] = useState("/hero.mp4"); // fallback video
 
-  // 🔥 Fetch hero data from backend (title, subtitle, location, size, video)
+  // 🔥 Fetch hero section (corrected endpoint)
   useEffect(() => {
     const fetchHero = async () => {
       try {
-        const res = await fetch(`${API}/hero`); // ❗ removed extra /api/
+        const res = await fetch(`${API}/hero`);   // ✅ FIXED (removed /api/)
         const data = await res.json();
 
         if (data) {
           setHeroData(data);
 
+          // Load video if exists
           if (data.videoUrl) {
-            setHeroVideo(`${API}${data.videoUrl}`); // full video URL
+            setHeroVideo(`${API}${data.videoUrl}`);
           }
         }
       } catch (error) {
@@ -34,12 +35,12 @@ const HeroSection = () => {
 
   return (
     <section className={`hero-section ${i18n.language === "ar" ? "rtl" : ""}`}>
-      {/* 🔹 Background Video */}
+      {/* Background Video */}
       <video className="hero-video" autoPlay loop muted playsInline>
         <source src={heroVideo} type="video/mp4" />
       </video>
 
-      {/* 🔹 Overlay Content */}
+      {/* Overlay */}
       <div className="hero-overlay">
         <div className="hero-content">
           <h1 className="hero-title">
