@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./HeroSection.css";
 
-const API = "https://starlinegroup.ae/api"; // ✅ UPDATED API
+const API = "https://starlinegroup.ae/api";
 
 const HeroSection = () => {
   const { t, i18n } = useTranslation();
@@ -10,11 +10,10 @@ const HeroSection = () => {
   const [heroData, setHeroData] = useState(null);
   const [heroVideo, setHeroVideo] = useState("/hero.mp4"); // fallback
 
-  // 🔥 Fetch hero section from backend
   useEffect(() => {
     const fetchHero = async () => {
       try {
-        const res = await fetch(`${API}/hero`); // ✅ FIXED (removed extra /api/)
+        const res = await fetch(`${API}/hero`);
         const data = await res.json();
 
         if (data) {
