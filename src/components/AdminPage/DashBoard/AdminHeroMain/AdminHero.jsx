@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import "./AdminHero.css";
 
-// -------------------------------------------
-// 🔗 ONLY API UPDATED (no extra /api/hero)
-// -------------------------------------------
-const API = "https://starlinegroup.ae/api";
-// -------------------------------------------
+const API = "https://starlinegroup.ae/api"; // ✅ UPDATED API
 
 export default function AdminHero() {
   const [hero, setHero] = useState(null);
@@ -20,7 +16,7 @@ export default function AdminHero() {
 
   const fetchHero = async () => {
     try {
-      const res = await fetch(`${API}/hero`);
+      const res = await fetch(`${API}/hero`); // 🔥 Correct endpoint
       if (!res.ok) throw new Error("Failed to fetch hero");
 
       const data = await res.json();
