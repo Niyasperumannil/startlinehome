@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ProjectGallery.css";
 
-const API = "http://157.173.219.218:5008"; // <-- UPDATED BACKEND URL
+const API = "https://starlinegroup.ae/api"; // ✅ UPDATED API ONLY
 
 const ProjectGallery = () => {
   const [projects, setProjects] = useState([]);
@@ -10,13 +10,13 @@ const ProjectGallery = () => {
   // FETCH PROJECTS FROM BACKEND
   const fetchProjects = async () => {
     try {
-      const res = await fetch(`${API}/api/projects/`);
+      const res = await fetch(`${API}/projects`); // ✅ removed extra /api/
       const data = await res.json();
 
       // Convert admin project format to frontend gallery format
       const formatted = data.map((p) => ({
         title: p.title,
-        size: p.subtitle || "", // use subtitle as size
+        size: p.subtitle || "",
         img: `${API}/uploads/projects/${p.coverImage}`, // full image URL
       }));
 

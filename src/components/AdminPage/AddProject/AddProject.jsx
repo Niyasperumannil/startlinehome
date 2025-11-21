@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const API = "http://157.173.219.218:5008"; // ✅ UPDATED API
+const API = "https://starlinegroup.ae/api"; // ✅ UPDATED API BASE URL
 
 export default function AddProject() {
   const [token, setToken] = useState("");
@@ -27,7 +27,7 @@ export default function AddProject() {
   // FETCH PROJECT LIST
   const fetchProjects = async () => {
     try {
-      const res = await axios.get(`${API}/api/projects/`);
+      const res = await axios.get(`${API}/projects/`);
       setProjects(res.data);
     } catch (err) {
       console.log("FETCH PROJECTS ERROR:", err);
@@ -39,7 +39,7 @@ export default function AddProject() {
     if (!window.confirm("Are you sure want to delete?")) return;
 
     try {
-      await axios.delete(`${API}/api/projects/${id}`, {
+      await axios.delete(`${API}/projects/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -76,7 +76,7 @@ export default function AddProject() {
       if (coverImage) formData.append("coverImage", coverImage);
       gallery.forEach((img) => formData.append("gallery", img));
 
-      await axios.post(`${API}/api/projects/create`, formData, {
+      await axios.post(`${API}/projects/create`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -102,7 +102,6 @@ export default function AddProject() {
 
   return (
     <div style={{ width: "95%", margin: "20px auto", fontFamily: "Inter" }}>
-
       {/* ---------- TOP RIGHT BAR ---------- */}
       <div style={{ display: "flex", justifyContent: "flex-end", gap: 10 }}>
         <input
@@ -143,7 +142,6 @@ export default function AddProject() {
       </div>
 
       <div style={{ display: "flex", gap: 20, marginTop: 20 }}>
-
         {/* ---------- LEFT SIDE – PROJECT LIST ---------- */}
         <div
           style={{

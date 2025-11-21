@@ -7,7 +7,7 @@ export default function ItalianCollection() {
   const [filtered, setFiltered] = useState([]);
   const [search, setSearch] = useState("");
 
-  const API = "http://157.173.219.218:5008/api/furniture"; // ✅ UPDATED VPS URL
+  const API = "https://starlinegroup.ae/api/furniture"; // ✅ UPDATED API ONLY
 
   // Fetch furniture from backend
   useEffect(() => {
@@ -108,7 +108,7 @@ export default function ItalianCollection() {
             <article className="ic-card" key={p._id}>
               <div className="ic-image-wrap">
                 <img
-                  src={`http://157.173.219.218:5008${p.img}`} // ✅ UPDATED VPS IMAGE PATH
+                  src={`https://starlinegroup.ae${p.img}`} // ✅ UPDATED IMAGE HOST ONLY
                   alt={p.title}
                   className="ic-image"
                 />

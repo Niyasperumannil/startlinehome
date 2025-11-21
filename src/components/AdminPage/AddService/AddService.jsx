@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+const API = "https://starlinegroup.ae/api/services"; // ✅ UPDATED API BASE URL
+
 export default function AddService() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -15,7 +17,7 @@ export default function AddService() {
 
   const fetchServices = async () => {
     try {
-      const res = await axios.get("http://157.173.219.218:5008/api/services/");
+      const res = await axios.get(`${API}/`);
       setServices(res.data);
     } catch (error) {
       console.log("FETCH ERROR:", error);
@@ -28,7 +30,7 @@ export default function AddService() {
     if (!window.confirm("Delete this service?")) return;
 
     try {
-      await axios.delete(`http://157.173.219.218:5008/api/services/${id}`, {
+      await axios.delete(`${API}/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchServices();
@@ -52,7 +54,7 @@ export default function AddService() {
     formData.append("image", file);
 
     try {
-      await axios.post("http://157.173.219.218:5008/api/services/create", formData, {
+      await axios.post(`${API}/create`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -120,7 +122,7 @@ export default function AddService() {
                     <tr key={srv._id} style={row}>
                       <td style={td}>
                         <img
-                          src={`http://157.173.219.218:5008${srv.image}`}
+                          src={`https://starlinegroup.ae${srv.image}`}
                           style={{
                             width: 60,
                             height: 60,

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ServicesOverviewSection.css";
 import axios from "axios";
 
-const API = "http://157.173.219.218:5008";
+const API = "https://starlinegroup.ae/api";
 
 const ServicesOverviewSection = () => {
   const [services, setServices] = useState([]);
@@ -13,7 +13,7 @@ const ServicesOverviewSection = () => {
 
   const fetchServices = async () => {
     try {
-      const res = await axios.get(`${API}/api/services/`);
+      const res = await axios.get(`${API}/services`);
       setServices(res.data);
     } catch (error) {
       console.log("FETCH ERROR:", error);

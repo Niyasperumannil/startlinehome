@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./SolomiaNews.css";
 import axios from "axios";
 
-const API = "http://157.173.219.218:5008";
+// ✅ UPDATED API ONLY — NO OTHER CHANGES
+const API = "https://starlinegroup.ae/api";
 
 export default function SolomiaNews() {
   const marqueeRef = useRef(null);
@@ -18,7 +19,7 @@ export default function SolomiaNews() {
 
   const fetchNews = async () => {
     try {
-      const res = await axios.get(`${API}/api/news/`);
+      const res = await axios.get(`${API}/news/`);
       setNewsItems(res.data);
     } catch (error) {
       console.log("FETCH NEWS ERROR:", error);

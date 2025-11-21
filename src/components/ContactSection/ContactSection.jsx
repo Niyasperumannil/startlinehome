@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import "./ContactSection.css";
 
-const API = "http://157.173.219.218:5008"; // ✅ UPDATED VPS URL
+const API = "https://starlinegroup.ae/api"; // ✅ UPDATED API
 
 const ContactSection = () => {
   const { t } = useTranslation();
@@ -27,7 +27,7 @@ const ContactSection = () => {
     }
 
     try {
-      const res = await fetch(`${API}/api/contact`, {
+      const res = await fetch(`${API}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

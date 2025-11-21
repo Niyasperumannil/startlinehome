@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./AdminLogin.css";
 
-const API = "https://starlinegroup.ae/api"; // ✅ FIXED API BASE URL
+const API = "https://starlinegroup.ae/api"; // ✅ UPDATED API BASE URL
 
 export default function AdminLogin({ setToken }) {
   const [username, setUsername] = useState("");

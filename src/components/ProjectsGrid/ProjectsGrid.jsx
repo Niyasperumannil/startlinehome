@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ProjectsGrid.css";
 
-const API = "http://157.173.219.218:5008"; // <-- UPDATED BACKEND URL
+const API = "https://starlinegroup.ae/api"; // <-- UPDATED API ONLY
 
 const ProjectsGrid = () => {
   const [projects, setProjects] = useState([]);
@@ -9,7 +9,7 @@ const ProjectsGrid = () => {
 
   const fetchProjects = async () => {
     try {
-      const res = await fetch(`${API}/api/projects/`);
+      const res = await fetch(`${API}/projects`);
       const data = await res.json();
 
       const formatted = data.map((p) => ({

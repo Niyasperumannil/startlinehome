@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./AdminMessages.css";
 
-const API = "https://starlinegroup.ae/api";   // ✅ FIXED
+const API = "https://starlinegroup.ae/api";   // ✅ UPDATED API
 
 export default function AdminMessages() {
   const [messages, setMessages] = useState([]);

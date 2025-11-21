@@ -22,7 +22,7 @@ export default function AdminHero() {
 
   const fetchHero = async () => {
     try {
-      const res = await fetch(`${API}/api/hero`);
+      const res = await fetch(`${API}/hero`);
       if (!res.ok) throw new Error("Failed to fetch hero");
 
       const data = await res.json();
@@ -54,7 +54,7 @@ export default function AdminHero() {
       formData.append("size", size);
       formData.append("video", video);
 
-      const res = await fetch(`${API}/api/hero`, {
+      const res = await fetch(`${API}/hero`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -86,7 +86,7 @@ export default function AdminHero() {
       formData.append("size", size);
       if (video) formData.append("video", video);
 
-      const res = await fetch(`${API}/api/hero`, {
+      const res = await fetch(`${API}/hero`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
