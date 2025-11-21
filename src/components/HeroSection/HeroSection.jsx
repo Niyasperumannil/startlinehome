@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./HeroSection.css";
 
@@ -8,10 +8,12 @@ const HeroSection = () => {
   const { t, i18n } = useTranslation();
 
   const [heroData, setHeroData] = useState(null);
-  const [heroVideo, setHeroVideo] = useState("/hero.mp4"); // default fallback
+  const [videoSrc, setVideoSrc] = useState(null);
   const [videoError, setVideoError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch hero data from backend
+  const videoRef = useRef(null);
+
   useEffect(() => {
     const fetchHero = async () => {
       try {
@@ -22,44 +24,61 @@ const HeroSection = () => {
         setHeroData(data);
 
         if (data.videoUrl) {
-          setHeroVideo(`${API}${data.videoUrl}`);
+          setVideoSrc(`${API}${data.videoUrl}`);
+        } else {
+          // fallback to a default video
+          setVideoSrc("/hero.mp4");
         }
       } catch (error) {
-        console.error("Failed to load hero:", error);
-        setHeroVideo("/hero.mp4"); // fallback on error
+        console.error("Error fetching hero:", error);
+        setVideoSrc("/hero.mp4"); // fallback on fetch error
       }
     };
 
     fetchHero();
   }, []);
 
-  // If video fails to load, switch to fallback
   const handleVideoError = () => {
-    if (!videoError) {
-      console.warn("Hero video failed to load, using fallback video");
-      setVideoError(true);
-      setHeroVideo("/hero.mp4");
-    }
+    console.warn("Hero video failed to load, switching to fallback");
+    setVideoError(true);
+    setVideoSrc("/hero.mp4");
+  };
+
+  const handleLoadedData = () => {
+    setIsLoading(false);
   };
 
   return (
     <section className={`hero-section ${i18n.language === "ar" ? "rtl" : ""}`}>
-      <video
-        className="hero-video"
-        autoPlay
-        loop
-        muted
-        playsInline
-        onError={handleVideoError}
-      >
-        <source src={heroVideo} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      <div className="hero-video-wrapper">
+        {isLoading && <div className="hero-loading">Loading video...</div>}
+
+        <video
+          ref={videoRef}
+          className="hero-video"
+          autoPlay
+          loop
+          muted
+          playsInline
+          onError={handleVideoError}
+          onLoadedData={handleLoadedData}
+          preload="auto"
+          // optionally, you can add a poster image:
+          // poster="/path/to/poster.jpg"
+        >
+          {videoSrc && <source src={videoSrc} type="video/mp4" />}
+          Your browser does not support the video tag.
+        </video>
+      </div>
 
       <div className="hero-overlay">
         <div className="hero-content">
-          <h1 className="hero-title">{heroData?.title || t("hero_title")}</h1>
-          <p className="hero-subtitle">{heroData?.subtitle || t("hero_subtitle")}</p>
+          <h1 className="hero-title">
+            {heroData?.title || t("hero_title")}
+          </h1>
+          <p className="hero-subtitle">
+            {heroData?.subtitle || t("hero_subtitle")}
+          </p>
 
           <div
             className="hero-arrow"
