@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./HeroSection.css";
 
-const API = "http://157.173.219.218:5008"; // <-- UPDATED BACKEND URL
+const API = "https://starlinegroup.ae/api"; // <-- UPDATED & FINAL API
 
 const HeroSection = () => {
   const { t, i18n } = useTranslation();
@@ -14,7 +14,7 @@ const HeroSection = () => {
   useEffect(() => {
     const fetchHero = async () => {
       try {
-        const res = await fetch(`${API}/api/hero`);
+        const res = await fetch(`${API}/hero`); // ❗ removed extra /api/
         const data = await res.json();
 
         if (data) {
@@ -34,7 +34,6 @@ const HeroSection = () => {
 
   return (
     <section className={`hero-section ${i18n.language === "ar" ? "rtl" : ""}`}>
-
       {/* 🔹 Background Video */}
       <video className="hero-video" autoPlay loop muted playsInline>
         <source src={heroVideo} type="video/mp4" />

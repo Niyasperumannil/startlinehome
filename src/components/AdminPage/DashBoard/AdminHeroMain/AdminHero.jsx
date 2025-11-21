@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import "./AdminHero.css";
 
 // -------------------------------------------
-// 🔗 BACKEND URL — ONLY THIS UPDATED
+// 🔗 ONLY API UPDATED (no extra /api/hero)
 // -------------------------------------------
-
 const API = "https://starlinegroup.ae/api";
-
 // -------------------------------------------
 
 export default function AdminHero() {
@@ -117,12 +115,7 @@ export default function AdminHero() {
     >
       <h2 style={{ marginBottom: 25 }}>Admin Hero Section</h2>
 
-      <div
-        style={{
-          display: "flex",
-          gap: "25px",
-        }}
-      >
+      <div style={{ display: "flex", gap: "25px" }}>
         <div
           style={{
             flex: 1,
