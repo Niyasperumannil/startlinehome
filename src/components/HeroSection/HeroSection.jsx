@@ -11,6 +11,7 @@ const HeroSection = () => {
   const [heroData, setHeroData] = useState(null);
   const [heroVideo, setHeroVideo] = useState("/hero.mp4"); // fallback
 
+  // Fetch hero section from backend
   useEffect(() => {
     const fetchHero = async () => {
       try {
@@ -20,9 +21,7 @@ const HeroSection = () => {
 
         if (data) {
           setHeroData(data);
-          if (data.videoUrl) {
-            setHeroVideo(`${API}${data.videoUrl}`);
-          }
+          if (data.videoUrl) setHeroVideo(`${API}${data.videoUrl}`);
         }
       } catch (error) {
         console.error("Failed to load hero:", error);
@@ -41,7 +40,6 @@ const HeroSection = () => {
       <div className="hero-overlay">
         <div className="hero-content">
           <h1 className="hero-title">{heroData?.title || t("hero_title")}</h1>
-
           <p className="hero-subtitle">{heroData?.subtitle || t("hero_subtitle")}</p>
 
           <div

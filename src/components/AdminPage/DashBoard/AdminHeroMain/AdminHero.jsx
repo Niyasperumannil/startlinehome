@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./AdminHero.css";
 
-// ✅ Updated API base
+// ✅ Updated API base (no trailing /api)
 const API = "https://starlinegroup.ae";
 
 export default function AdminHero() {
@@ -53,7 +53,9 @@ export default function AdminHero() {
 
       const res = await fetch(`${API}/api/hero`, {
         method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: formData,
       });
 
@@ -84,7 +86,9 @@ export default function AdminHero() {
 
       const res = await fetch(`${API}/api/hero`, {
         method: "PUT",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: formData,
       });
 
@@ -105,7 +109,7 @@ export default function AdminHero() {
       <h2 style={{ marginBottom: 25 }}>Admin Hero Section</h2>
 
       <div style={{ display: "flex", gap: "25px" }}>
-        {/* Current Video */}
+        {/* Current Video Section */}
         <div
           style={{
             flex: 1,
@@ -135,7 +139,7 @@ export default function AdminHero() {
           )}
         </div>
 
-        {/* Form */}
+        {/* Form Section */}
         <div
           style={{
             flex: 1.2,
