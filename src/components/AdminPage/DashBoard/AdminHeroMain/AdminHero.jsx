@@ -5,8 +5,7 @@ import "./AdminHero.css";
 // 🔗 BACKEND URL — ONLY THIS UPDATED
 // -------------------------------------------
 
-// For VPS production:
-const API = "http://157.173.219.218:5008";
+const API = "https://starlinegroup.ae/api";
 
 // -------------------------------------------
 
@@ -21,7 +20,6 @@ export default function AdminHero() {
 
   const token = localStorage.getItem("token");
 
-  // ------------------ Fetch Hero ------------------
   const fetchHero = async () => {
     try {
       const res = await fetch(`${API}/api/hero`);
@@ -44,7 +42,6 @@ export default function AdminHero() {
     fetchHero();
   }, []);
 
-  // ------------------ Add Hero ------------------
   const handleAdd = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -77,7 +74,6 @@ export default function AdminHero() {
     }
   };
 
-  // ------------------ Update Hero ------------------
   const handleUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -121,14 +117,12 @@ export default function AdminHero() {
     >
       <h2 style={{ marginBottom: 25 }}>Admin Hero Section</h2>
 
-      {/* MAIN 2-COLUMN LAYOUT */}
       <div
         style={{
           display: "flex",
           gap: "25px",
         }}
       >
-        {/* LEFT SIDE – VIDEO PREVIEW */}
         <div
           style={{
             flex: 1,
@@ -158,7 +152,6 @@ export default function AdminHero() {
           )}
         </div>
 
-        {/* RIGHT SIDE – FORM */}
         <div
           style={{
             flex: 1.2,
@@ -221,10 +214,7 @@ export default function AdminHero() {
               }}
             />
 
-            <button
-              style={btnPrimary}
-              disabled={loading}
-            >
+            <button style={btnPrimary} disabled={loading}>
               {loading
                 ? "Please Wait..."
                 : hero
@@ -238,7 +228,6 @@ export default function AdminHero() {
   );
 }
 
-/* UI Styles */
 const inputStyle = {
   width: "100%",
   padding: "12px",

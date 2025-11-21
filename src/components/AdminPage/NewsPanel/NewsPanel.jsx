@@ -44,7 +44,7 @@ export default function NewsPanel() {
   };
 
   const handleDelete = async (id) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("adminToken");
     if (!token) {
       alert("Admin not logged in");
       return;
@@ -69,7 +69,7 @@ export default function NewsPanel() {
     setTitle(item.title);
     setDesc(item.desc);
     setDate(item.date);
-    // We won't set the file since we don't have the File object; user has to re-upload if changing
+
     if (fileInputRef.current) fileInputRef.current.value = "";
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -79,7 +79,7 @@ export default function NewsPanel() {
     setMsg("");
     setError("");
 
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("adminToken");
     if (!token) {
       setError("Admin not logged in — No token found.");
       return;
@@ -89,13 +89,10 @@ export default function NewsPanel() {
     formData.append("title", title);
     formData.append("desc", desc);
     formData.append("date", date);
-    if (file) {
-      formData.append("image", file);
-    }
+    if (file) formData.append("image", file);
 
     try {
       if (editingId) {
-        // If editing, assuming your backend supports PUT for update
         await axios.put(`${API}/news/${editingId}`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -104,7 +101,6 @@ export default function NewsPanel() {
         });
         setMsg("News updated successfully!");
       } else {
-        // Create
         await axios.post(`${API}/news/create`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -122,7 +118,7 @@ export default function NewsPanel() {
     }
   };
 
-  // Filtered list based on search
+  // Filter based on search
   const filteredNews = newsList.filter((item) => {
     const q = search.trim().toLowerCase();
     if (!q) return true;
@@ -152,13 +148,16 @@ export default function NewsPanel() {
           <button onClick={fetchNews} style={topButton}>
             Refresh
           </button>
-          <button onClick={resetForm} style={{ ...topButton, marginLeft: 10, background: "#0d6efd", color: "white" }}>
+          <button
+            onClick={resetForm}
+            style={{ ...topButton, marginLeft: 10, background: "#0d6efd", color: "white" }}
+          >
             {editingId ? "Cancel Edit" : "New News"}
           </button>
         </div>
       </div>
 
-      {/* Main Content */}
+      {/* Layout */}
       <div style={{ display: "flex", gap: "25px" }}>
         {/* List Panel */}
         <div style={leftCard}>
@@ -167,9 +166,7 @@ export default function NewsPanel() {
           {error && <p style={{ color: "red" }}>{error}</p>}
 
           {filteredNews.length === 0 ? (
-            <p style={{ color: "#777", fontSize: 16 }}>
-              No news found.
-            </p>
+            <p style={{ color: "#777", fontSize: 16 }}>No news found.</p>
           ) : (
             <table style={tableStyle}>
               <thead>
@@ -189,7 +186,12 @@ export default function NewsPanel() {
                         <img
                           src={`https://starlinegroup.ae${item.image}`}
                           alt=""
-                          style={{ width: 60, height: 60, borderRadius: 6, objectFit: "cover" }}
+                          style={{
+                            width: 60,
+                            height: 60,
+                            borderRadius: 6,
+                            objectFit: "cover",
+                          }}
                         />
                       )}
                     </td>
@@ -215,7 +217,9 @@ export default function NewsPanel() {
         <div style={rightCard}>
           <h2 style={sectionTitle}>{editingId ? "Edit News" : "Add News"}</h2>
 
-          {msg && <p style={{ ...errorBox, background: "#e0f7e9", color: "#065f46" }}>{msg}</p>}
+          {msg && (
+            <p style={{ ...errorBox, background: "#e0f7e9", color: "#065f46" }}>{msg}</p>
+          )}
           {error && <p style={errorBox}>{error}</p>}
 
           <form onSubmit={handleSubmit}>
@@ -247,6 +251,7 @@ export default function NewsPanel() {
               onChange={(e) => setFile(e.target.files[0])}
               style={input}
             />
+
             <div style={{ display: "flex", gap: 10, marginTop: 10 }}>
               <button type="submit" style={addBtn}>
                 {editingId ? "Update News" : "Add News"}

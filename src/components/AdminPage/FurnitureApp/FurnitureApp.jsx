@@ -4,12 +4,12 @@ import axios from "axios";
 
 /*
   Single-file Furniture CRUD Admin UI
-  - Backend expected at: http://157.173.219.218:5008/api/furniture
+  - Backend expected at: https://starlinegroup.ae/api
   - Token read from localStorage key: "adminToken"
   - Image upload uses FormData with field name "img" (matches backend middleware)
 */
 
-const API_BASE = "http://157.173.219.218:5008/api/furniture";
+const API_BASE = "https://starlinegroup.ae/api";  // ✅ UPDATED API
 const TOKEN_KEY = "adminToken";
 
 export default function FurnitureApp() {
@@ -26,14 +26,13 @@ export default function FurnitureApp() {
     title: "",
     brand: "",
     price: "",
-    imgFile: null, // File object
+    imgFile: null,
   });
 
   const [editId, setEditId] = useState(null);
   const [previewSrc, setPreviewSrc] = useState(null);
   const fileInputRef = useRef(null);
 
-  // Inject component CSS
   useEffect(() => {
     const css = `
       .fa-app { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; padding: 18px; max-width: 1100px; margin: 24px auto; color: #111; }
@@ -80,7 +79,7 @@ export default function FurnitureApp() {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.get(API_BASE);
+      const res = await axios.get(`${API_BASE}/furniture`);
       setItems(res.data || []);
     } catch (err) {
       setError("Failed to load furniture. Is the backend running?");
@@ -96,25 +95,20 @@ export default function FurnitureApp() {
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "imgFile") {
-      const file = files && files[0] ? files[0] : null;
+      const file = files?.[0] || null;
       setForm((s) => ({ ...s, imgFile: file }));
-      if (file) {
-        const url = URL.createObjectURL(file);
-        setPreviewSrc(url);
-      } else {
-        setPreviewSrc(null);
-      }
+      setPreviewSrc(file ? URL.createObjectURL(file) : null);
     } else {
       setForm((s) => ({ ...s, [name]: value }));
     }
   };
 
   const validateForm = () => {
-    if (!form.name?.trim()) return "Name is required";
-    if (!form.title?.trim()) return "Title is required";
-    if (!form.brand?.trim()) return "Brand is required";
-    if (!form.price?.trim()) return "Price is required";
-    if (!editId && !form.imgFile) return "Image is required for new furniture";
+    if (!form.name.trim()) return "Name required";
+    if (!form.title.trim()) return "Title required";
+    if (!form.brand.trim()) return "Brand required";
+    if (!form.price.trim()) return "Price required";
+    if (!editId && !form.imgFile) return "Image required for new furniture";
     return null;
   };
 
@@ -126,10 +120,7 @@ export default function FurnitureApp() {
   const handleSubmit = async () => {
     setError(null);
     const v = validateForm();
-    if (v) {
-      setError(v);
-      return;
-    }
+    if (v) return setError(v);
 
     setSubmitLoading(true);
     try {
@@ -141,26 +132,19 @@ export default function FurnitureApp() {
       if (form.imgFile) fd.append("img", form.imgFile);
 
       if (editId) {
-        await axios.put(`${API_BASE}/${editId}`, fd, {
-          headers: {
-            ...getAuthHeaders(),
-            "Content-Type": "multipart/form-data",
-          },
+        await axios.put(`${API_BASE}/furniture/${editId}`, fd, {
+          headers: { ...getAuthHeaders(), "Content-Type": "multipart/form-data" },
         });
       } else {
-        await axios.post(API_BASE, fd, {
-          headers: {
-            ...getAuthHeaders(),
-            "Content-Type": "multipart/form-data",
-          },
+        await axios.post(`${API_BASE}/furniture`, fd, {
+          headers: { ...getAuthHeaders(), "Content-Type": "multipart/form-data" },
         });
       }
 
       await loadItems();
       resetForm();
     } catch (err) {
-      const msg = err?.response?.data?.message || "Failed to save furniture";
-      setError(msg);
+      setError(err?.response?.data?.message || "Failed to save");
     } finally {
       setSubmitLoading(false);
     }
@@ -169,15 +153,14 @@ export default function FurnitureApp() {
   const startEdit = (item) => {
     setEditId(item._id);
     setForm({
-      name: item.name || "",
-      title: item.title || "",
-      brand: item.brand || "",
-      price: item.price || "",
+      name: item.name,
+      title: item.title,
+      brand: item.brand,
+      price: item.price,
       imgFile: null,
     });
 
-    setPreviewSrc(item.img ? `http://157.173.219.218:5008${item.img}` : null);
-
+    setPreviewSrc(item.img ? `https://starlinegroup.ae${item.img}` : null);
     if (fileInputRef.current) fileInputRef.current.value = "";
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -191,24 +174,23 @@ export default function FurnitureApp() {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Delete this furniture item? This cannot be undone.")) return;
+    if (!window.confirm("Delete this item permanently?")) return;
     try {
-      await axios.delete(`${API_BASE}/${id}`, {
+      await axios.delete(`${API_BASE}/furniture/${id}`, {
         headers: { ...getAuthHeaders() },
       });
       await loadItems();
     } catch (err) {
-      setError("Failed to delete item");
+      setError("Failed to delete");
     }
   };
 
   const filtered = items.filter((it) => {
-    const q = search.trim().toLowerCase();
-    if (!q) return true;
+    const q = search.toLowerCase();
     return (
-      (it.name || "").toLowerCase().includes(q) ||
-      (it.brand || "").toLowerCase().includes(q) ||
-      (it.title || "").toLowerCase().includes(q)
+      it.name?.toLowerCase().includes(q) ||
+      it.brand?.toLowerCase().includes(q) ||
+      it.title?.toLowerCase().includes(q)
     );
   });
 
@@ -220,7 +202,7 @@ export default function FurnitureApp() {
         <div className="fa-controls">
           <input
             className="fa-search"
-            placeholder="Search by name, title or brand"
+            placeholder="Search by name/title/brand"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -236,64 +218,72 @@ export default function FurnitureApp() {
 
       <div className="fa-grid">
         <div className="fa-list fa-panel">
-          <h3 style={{ marginTop: 0, marginBottom: 8 }}>Furniture List {loading ? " (loading...)" : ""}</h3>
+          <h3>Furniture List {loading && " (loading...)"}</h3>
 
-          {error && <div className="fa-msg" style={{ marginBottom: 10 }}>{error}</div>}
+          {error && <div className="fa-msg">{error}</div>}
 
           {!loading && filtered.length === 0 && (
-            <div className="fa-empty">No furniture found. Add a new item using the form.</div>
+            <div className="fa-empty">No items found.</div>
           )}
 
-          {loading && <div className="fa-info">Loading items...</div>}
+          {!loading &&
+            filtered.map((it) => (
+              <div className="fa-item" key={it._id}>
+                <img
+                  className="fa-thumb"
+                  src={it.img ? `https://starlinegroup.ae${it.img}` : undefined}
+                  alt=""
+                />
 
-          {!loading && filtered.map((it) => (
-            <div className="fa-item" key={it._id}>
-              <img className="fa-thumb" alt={it.title} src={it.img ? `http://157.173.219.218:5008${it.img}` : undefined} />
+                <div className="fa-meta">
+                  <div className="fa-name">{it.name}</div>
+                  <div className="fa-brand">
+                    {it.brand} • {it.title}
+                  </div>
+                  <div className="fa-price">{it.price}</div>
+                </div>
 
-              <div className="fa-meta">
-                <div className="fa-name">{it.name}</div>
-                <div className="fa-brand">{it.brand} • {it.title}</div>
-                <div className="fa-price">{it.price}</div>
-                <div style={{ marginTop: 6, fontSize: 13, color: "#64748b" }}>ID: {it._id}</div>
+                <div className="fa-actions">
+                  <button className="fa-btn" onClick={() => startEdit(it)}>
+                    Edit
+                  </button>
+                  <button className="fa-btn" onClick={() => handleDelete(it._id)}>
+                    Delete
+                  </button>
+                </div>
               </div>
-
-              <div className="fa-actions">
-                <button className="fa-btn" onClick={() => startEdit(it)}>Edit</button>
-                <button className="fa-btn" onClick={() => handleDelete(it._id)}>Delete</button>
-              </div>
-            </div>
-          ))}
+            ))}
         </div>
 
         <div className="fa-panel">
-          <h3 style={{ marginTop: 0 }}>{editId ? "Edit Furniture" : "Add Furniture"}</h3>
+          <h3>{editId ? "Edit Furniture" : "Add Furniture"}</h3>
 
           <div className="fa-form">
             <input
               className="fa-input"
               name="name"
-              placeholder="Name (e.g. BURTON)"
+              placeholder="Name"
               value={form.name}
               onChange={handleChange}
             />
             <input
               className="fa-input"
               name="title"
-              placeholder="Title (e.g. Burton Sofa)"
+              placeholder="Title"
               value={form.title}
               onChange={handleChange}
             />
             <input
               className="fa-input"
               name="brand"
-              placeholder="Brand (e.g. Frigerio)"
+              placeholder="Brand"
               value={form.brand}
               onChange={handleChange}
             />
             <input
               className="fa-input"
               name="price"
-              placeholder="Price (e.g. From 24,000 AED)"
+              placeholder="Price"
               value={form.price}
               onChange={handleChange}
             />
@@ -311,17 +301,21 @@ export default function FurnitureApp() {
               </div>
             </div>
 
-            {previewSrc && (
-              <img alt="preview" className="fa-preview" src={previewSrc} />
-            )}
+            {previewSrc && <img className="fa-preview" src={previewSrc} alt="" />}
 
-            <div style={{ display: "flex", gap: 8, marginTop: 6 }}>
+            <div style={{ display: "flex", gap: 8 }}>
               <button
                 className="fa-btn primary"
                 onClick={handleSubmit}
                 disabled={submitLoading}
               >
-                {submitLoading ? (editId ? "Updating..." : "Adding...") : (editId ? "Update Item" : "Add Item")}
+                {submitLoading
+                  ? editId
+                    ? "Updating..."
+                    : "Adding..."
+                  : editId
+                  ? "Update Item"
+                  : "Add Item"}
               </button>
 
               <button
@@ -333,11 +327,9 @@ export default function FurnitureApp() {
               </button>
             </div>
 
-            <div style={{ marginTop: 8, fontSize: 13, color: "#94a3b8" }}>
-              Tip: Make sure your backend server is running and the upload folder exists at <code>/uploads/furniture</code>.
-            </div>
           </div>
         </div>
+
       </div>
     </div>
   );
