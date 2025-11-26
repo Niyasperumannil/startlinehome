@@ -11,6 +11,8 @@ import ContactSection from '../../components/ContactSection/ContactSection'
 import Footer from '../../components/Footer/Footer'
 import VideoSection from '../../components/About/VideoSection/VideoSection'
 import BeforeAfterSection from '../../components/About/BeforeAfterSection/BeforeAfterSection'
+import Steps from '../../components/About/Steps/Steps'
+import FurnitureShowcase from '../../components/About/FurnitureShowcase/FurnitureShowcase'
 
 function Hero() {
   return (
@@ -19,7 +21,10 @@ function Hero() {
     <HeroSection />
         <BeforeAfterSection />
     <AboutSection />
-    <ProjectsHeader />
+    <Steps />
+    <FurnitureShowcase />
+        <ProjectsHeader />
+     
     <ProjectsGrid />
     <UpdatedSection />
     <VideoHero />

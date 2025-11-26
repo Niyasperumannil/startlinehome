@@ -17,8 +17,9 @@ function AboutSection() {
       <Navbar />
       <TeamSection />
       <CompanyIntroSection />
+            <BeforeAfterSlider />
+
       <FullWidthImageSection />
-      <BeforeAfterSlider />
       <ServicesOverviewSection />
       <SolomiaNews />
       <AwardGallery />

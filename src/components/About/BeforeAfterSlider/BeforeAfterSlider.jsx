@@ -47,7 +47,7 @@ const App = () => {
       <BeforeAfterSlider
         beforeImage="/Gemini_Generated_Image_4ggfc74ggfc74ggf.png"
         afterImage="/Gemini_Generated_Image_4ggfc74ggfc74ggf.png"
-        backgroundImage="/Gemini_Generated_Image_4ggfc74ggfc74ggf.png" // optional background
+        // backgroundImage="/Gemini_Generated_Image_4ggfc74ggfc74ggf.png" // optional background
         width="100%"
         height="500px"
       />
