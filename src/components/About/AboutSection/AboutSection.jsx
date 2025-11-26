@@ -9,6 +9,7 @@ import ServicesOverviewSection from '../ServicesOverviewSection/ServicesOverview
 import SolomiaNews from '../SolomiaNews/SolomiaNews'
 import AwardGallery from '../AwardGallery/AwardGallery'
 import AwardsSection from '../AwardsSection/AwardsSection'
+import BeforeAfterSlider from '../BeforeAfterSlider/BeforeAfterSlider'
 
 function AboutSection() {
   return (
@@ -17,6 +18,7 @@ function AboutSection() {
       <TeamSection />
       <CompanyIntroSection />
       <FullWidthImageSection />
+      <BeforeAfterSlider />
       <ServicesOverviewSection />
       <SolomiaNews />
       <AwardGallery />

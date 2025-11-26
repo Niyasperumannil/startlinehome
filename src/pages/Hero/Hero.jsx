@@ -9,18 +9,23 @@ import UpdatedSection from '../../components/UpdatedSection/UpdatedSection'
 import VideoHero from '../../components/VideoHero/VideoHero'
 import ContactSection from '../../components/ContactSection/ContactSection'
 import Footer from '../../components/Footer/Footer'
+import VideoSection from '../../components/About/VideoSection/VideoSection'
+import BeforeAfterSection from '../../components/About/BeforeAfterSection/BeforeAfterSection'
 
 function Hero() {
   return (
     <>
     <Navbar />
     <HeroSection />
+        <BeforeAfterSection />
     <AboutSection />
     <ProjectsHeader />
     <ProjectsGrid />
     <UpdatedSection />
     <VideoHero />
     <ContactSection />
+        <VideoSection />
+
     <Footer />
     </>
   )
