@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./OurServices.css";
 
-const API = "http://157.173.219.218:5008"; // UPDATED API
+// ✅ USE SAME API AS AddService PAGE
+const API = "https://starlinegroup.ae/api/services";
 
 const OurServices = () => {
   const [services, setServices] = useState([]);
@@ -12,7 +13,7 @@ const OurServices = () => {
 
   const fetchServices = async () => {
     try {
-      const res = await fetch(`${API}/api/services/`);
+      const res = await fetch(`${API}/`);
       const data = await res.json();
       setServices(data);
     } catch (error) {
@@ -26,7 +27,7 @@ const OurServices = () => {
         <h1>Our services</h1>
       </section>
 
-      {/* ✔ Display first service block */}
+      {/* ✔ FIRST SERVICE */}
       {services[0] && (
         <section className="service-block service-card-versace">
           <div className="service-text versace-text">
@@ -37,19 +38,19 @@ const OurServices = () => {
 
           <div className="service-image versace-image">
             <img
-              src={`${API}${services[0].image}`}
+              src={`https://starlinegroup.ae${services[0].image}`}
               alt={services[0].title}
             />
           </div>
         </section>
       )}
 
-      {/* ✔ Display second service block */}
+      {/* ✔ SECOND SERVICE */}
       {services[1] && (
         <section className="service-block service-card-furniture">
           <div className="service-image furniture-image">
             <img
-              src={`${API}${services[1].image}`}
+              src={`https://starlinegroup.ae${services[1].image}`}
               alt={services[1].title}
             />
           </div>
