@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import "./BeforeAfterSlider.css";
 
-const BeforeAfterSlider = ({ beforeImage, afterImage, width = "100%", height = "500px", backgroundImage }) => {
+const BeforeAfterSlider = ({
+  beforeImage,
+  afterImage,
+  width = "100%",
+  height = "500px",
+  backgroundImage,
+  heading = "Before / After Comparison",
+}) => {
   const [sliderPosition, setSliderPosition] = useState(50);
 
   const handleSliderChange = (e) => {
@@ -9,31 +16,39 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, width = "100%", height = "
   };
 
   return (
-    <div
-      className="before-after-container"
-      style={{
-        width,
-        height,
-        backgroundImage: backgroundImage ? `url(${backgroundImage})` : "none",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
+    <div className="before-after-section">
+
+      {/* TOP HEADER */}
+      <h2 className="before-after-header">{heading}</h2>
+
       <div
-        className="before-after-inner"
-        style={{ width: `${sliderPosition}%` }}
+        className="before-after-container"
+        style={{
+          width,
+          height,
+          backgroundImage: backgroundImage ? `url(${backgroundImage})` : "none",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
-        <img src={beforeImage} alt="Before" className="before-image" />
+        <div
+          className="before-after-inner"
+          style={{ width: `${sliderPosition}%` }}
+        >
+          <img src={beforeImage} alt="Before" className="before-image" />
+        </div>
+
+        <img src={afterImage} alt="After" className="after-image" />
+
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={sliderPosition}
+          className="slider"
+          onChange={handleSliderChange}
+        />
       </div>
-      <img src={afterImage} alt="After" className="after-image" />
-      <input
-        type="range"
-        min="0"
-        max="100"
-        value={sliderPosition}
-        className="slider"
-        onChange={handleSliderChange}
-      />
     </div>
   );
 };
@@ -47,9 +62,9 @@ const App = () => {
       <BeforeAfterSlider
         beforeImage="/Gemini_Generated_Image_4ggfc74ggfc74ggf.png"
         afterImage="/Gemini_Generated_Image_4ggfc74ggfc74ggf.png"
-        // backgroundImage="/Gemini_Generated_Image_4ggfc74ggfc74ggf.png" // optional background
         width="100%"
         height="500px"
+        heading="Starline  Before & After Results"
       />
     </div>
   );

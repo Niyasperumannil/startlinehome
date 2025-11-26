@@ -19,10 +19,11 @@ function Hero() {
     <>
     <Navbar />
     <HeroSection />
+        <FurnitureShowcase />
+
         <BeforeAfterSection />
     <AboutSection />
     <Steps />
-    <FurnitureShowcase />
         <ProjectsHeader />
      
     <ProjectsGrid />
