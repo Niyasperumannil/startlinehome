@@ -21,22 +21,21 @@ body {
 /* HEADER */
 .awards-title {
   font-family: Gilroy;
-font-size: 48px;
-font-weight: 300;
-line-height: 48px;
-color: rgb(51, 51, 51);
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 48px;
+  color: rgb(51, 51, 51);
   margin-bottom: 50px;
   margin-left: -910px;
-
 }
 
 .awards-title .awards-light {
   font-family: Gilroy;
-font-size: 48px;
-font-weight: 300;
-line-height: 48px;
-color: rgb(51, 51, 51);
-margin-right: -250px
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 48px;
+  color: rgb(51, 51, 51);
+  margin-right: -250px;
 }
 
 /* WRAPPER */
@@ -101,7 +100,7 @@ margin-right: -250px
   color: white;
 }
 
-/* MAIN TITLE */
+/* MAIN TITLE INSIDE CARD */
 .fs-main-title {
   position: absolute;
   bottom: 40px;
@@ -112,16 +111,12 @@ margin-right: -250px
   text-shadow: 0px 3px 5px rgba(0,0,0,0.4);
 }
 
-/* MOBILE RESPONSIVE HIDDEN */
-/*
-@media (max-width: 1024px) { ... }
-@media (max-width: 768px) { ... }
-@media (max-width: 480px) { ... }
-*/
-
 /* HIDE ON MOBILE DEVICES */
 @media (max-width: 768px) {
   .fs-wrapper {
-    display: none; /* completely hide cards on mobile */
+    display: none !important; /* hide wrapper and all cards */
+  }
+  .awards-title {
+    display: none !important; /* hide the title too */
   }
 }

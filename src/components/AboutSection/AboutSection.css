@@ -55,29 +55,16 @@ line-height: 48px;
 color: rgb(51, 51, 51);
 }
 
-.about-title .line2 {
-  font-family: Gilroy;
-font-size: 40px;
-font-weight: 300;
-line-height: 48px;
-color: rgb(51, 51, 51);
-margin-left: 70px;
+.line2 {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 48px;
+  color: rgb(51, 51, 51);
+  margin-left: 70px;
 }
 
-.about-title .bold {
- font-family: Gilroy;
-font-size: 48px;
-font-weight: 300;
-line-height: 48px;
-color: rgb(51, 51, 51);}
 
-.about-title .light {
-  font-family: Gilroy;
-font-size: 48px;
-font-weight: 300;
-line-height: 48px;
-color: rgb(51, 51, 51);
-}
 
 /* ===== Description ===== */
 .about-description {

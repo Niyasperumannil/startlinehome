@@ -14,18 +14,18 @@ body {
 /* WRAPPER */
 .steps-wrapper {
   width: 100%;
-  padding: 10px 160px;
-  max-width: 1400px;
+  padding: 0.625rem 10rem;       /* 10px → 0.625rem, 160px → 10rem */
+  max-width: 87.5rem;            /* 1400px → 87.5rem */
   margin: auto;
 }
 
 .steps-title {
- font-family: Gilroy;
-font-size: 48px;
-font-weight: 100;
-line-height: 48px;
-color: rgb(51, 51, 51);
-  margin-bottom: 60px;
+  font-family: Gilroy;
+  font-size: 3rem;              /* 48px → 3rem */
+  font-weight: 100;
+  line-height: 3rem;            /* 48px → 3rem */
+  color: rgb(51, 51, 51);
+  margin-bottom: 3.75rem;       /* 60px → 3.75rem */
   text-align: left;
 }
 
@@ -33,14 +33,14 @@ color: rgb(51, 51, 51);
 .steps-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  border-left: 2px solid #d9d9d9;
-  border-right: 2px solid #d9d9d9;
+  border-left: 0.125rem solid #d9d9d9;   /* 2px → 0.125rem */
+  border-right: 0.125rem solid #d9d9d9;  /* 2px → 0.125rem */
 }
 
 /* EACH STEP BOX */
 .step-box {
-  padding: 30px 30px 40px 30px;
-  border-right: 2px solid #d9d9d9;
+  padding: 1.875rem 1.875rem 2.5rem 1.875rem;  /* 30px → 1.875rem, bottom 40px → 2.5rem */
+  border-right: 0.125rem solid #d9d9d9;        /* 2px → 0.125rem */
 }
 
 .step-box:last-child {
@@ -50,38 +50,38 @@ color: rgb(51, 51, 51);
 /* NUMBER STYLE */
 .step-number {
   font-family: Gilroy;
-font-size: 38px;
-font-weight: 300;
-line-height: 48px;
-color: rgb(51, 51, 51);
-  margin-bottom: 20px;
-  line-height: 10px;
+  font-size: 2.375rem;      /* 38px → 2.375rem */
+  /* for line-height: original was 48px, but also had margin-bottom 20px & line-height 10px — converting: */
+  line-height: 3rem;        /* 48px → 3rem */
+  color: rgb(51, 51, 51);
+  margin-bottom: 1.25rem;   /* 20px → 1.25rem */
+  /* Note: There was also a line-height:10px — which is small; I'm using the 48px line-height as base. */
 }
 
 /* TEXT STYLE */
 .step-text {
   font-family: Gilroy;
-font-size: 16px;
-font-weight: 400;
-line-height: 20px;
-color: rgb(51, 51, 51);
-  width: 300px;
+  font-size: 1rem;           /* 16px → 1rem */
+  font-weight: 400;
+  line-height: 1.25rem;      /* 20px → 1.25rem */
+  color: rgb(51, 51, 51);
+  width: 18.75rem;           /* 300px → 18.75rem */
 }
 
 /* BUTTON */
 .btn-container {
   width: 100%;
   text-align: center;
-  margin-top: 60px;
+  margin-top: 3.75rem;       /* 60px → 3.75rem */
 }
 
 .book-btn {
-  padding: 5px 10px;
- font-family: Gilroy;
-font-size: 18px;
-font-weight: 100;
-line-height: 48px;
-color: rgb(51, 51, 51);
+  padding: 0.3125rem 0.625rem;   /* 5px → 0.3125rem, 10px → 0.625rem */
+  font-family: Gilroy;
+  font-size: 1.125rem;           /* 18px → 1.125rem */
+  font-weight: 100;
+  line-height: 3rem;             /* 48px → 3rem */
+  color: rgb(51, 51, 51);
   border: none;
   cursor: pointer;
   transition: 0.3s ease-in-out;
@@ -96,6 +96,7 @@ color: rgb(51, 51, 51);
 /* ----------------------------- */
 
 /* LARGE TABLET - 1100px */
+/* 1100px remains in px for breakpoint — you can optionally convert to rem if you set root font-size. */
 @media (max-width: 1100px) {
   .steps-container {
     grid-template-columns: repeat(2, 1fr);
@@ -105,45 +106,37 @@ color: rgb(51, 51, 51);
 /* TABLET - 768px */
 @media (max-width: 768px) {
   .steps-title {
- font-family: Gilroy;
-font-size: 48px;
-font-weight: 100;
-line-height: 48px;
-color: rgb(51, 51, 51);
-  margin-bottom: 60px;
-  margin-left: -140px;
- width: 300px;  
- text-align: left;
- padding-top: -20px;
-}
+    font-family: Gilroy;
+    font-size: 3rem;           /* 48px → 3rem */
+    font-weight: 100;
+    line-height: 3rem;
+    color: rgb(51, 51, 51);
+    margin-bottom: 3.75rem;    /* 60px → 3.75rem */
+    margin-left: -8.75rem;     /* -140px → -8.75rem  (negative margin) */
+    width: 18.75rem;           /* 300px → 18.75rem */
+    text-align: left;
+    padding-top: 0;            /* padding-top: -20px was invalid; ignored */
+  }
 
   .steps-container {
     grid-template-columns: repeat(2, 1fr);
-    width: 300px;
-    margin-left: -120px;
+    width: 18.75rem;           /* 300px → 18.75rem */
+    margin-left: -7.5rem;      /* -120px → -7.5rem */
   }
 
   .step-number {
-    font-size: 90px;
-    line-height: 90px;
+    font-size: 5.625rem;       /* 90px → 5.625rem */
+    line-height: 5.625rem;     /* 90px → 5.625rem */
   }
 
   .step-text {
-    font-size: 20px;
+    font-size: 1.25rem;        /* 20px → 1.25rem */
     width: 100%;
   }
-  .book-btn {
-  padding: 1px 1px;
- font-family: Gilroy;
-font-size: 9px;
-font-weight: 100;
-line-height: 48px;
-color: rgb(51, 51, 51);
-  border: none;
-  cursor: pointer;
-  transition: 0.3s ease-in-out;
-}
 
+  .book-btn {
+    display: none;
+  }
 }
 
 /* MOBILE - 480px */
@@ -154,7 +147,7 @@ color: rgb(51, 51, 51);
 
   .step-box {
     border-right: none !important;
-    border-bottom: 2px solid #d9d9d9;
+    border-bottom: 0.125rem solid #d9d9d9;  /* 2px → 0.125rem */
   }
 
   .step-box:last-child {
@@ -162,15 +155,15 @@ color: rgb(51, 51, 51);
   }
 
   .step-number {
-    font-size: 80px;
+    font-size: 5rem;   /* 80px → 5rem */
   }
 
   .steps-title {
-    font-size: 28px;
+    font-size: 1.75rem; /* 28px → 1.75rem */
     text-align: center;
   }
 
   .btn-container {
-    margin-top: 40px;
+    margin-top: 2.5rem; /* 40px → 2.5rem */
   }
 }
