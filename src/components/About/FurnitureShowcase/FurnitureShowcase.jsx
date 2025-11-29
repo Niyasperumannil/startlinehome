@@ -26,7 +26,7 @@ export default function FurnitureShowcase() {
           onTouchStart={() => handleSelect(1)}
           onMouseEnter={() => handleSelect(1)}   
         >
-          <img src="https://file.sunonglobal.com/wp-content/uploads/2025/03/pic8-3.jpg" />
+          <img src="https://starlinegroup.ae/uploads/projects/1764132317353_fa16050a2e431ba96456250b3aa2a56e.jpg" />
           <div className="fs-label"></div>
         </div>
 
@@ -37,7 +37,7 @@ export default function FurnitureShowcase() {
           onTouchStart={() => handleSelect(2)}
           onMouseEnter={() => handleSelect(2)}   
         >
-          <img src="https://file.sunonglobal.com/wp-content/uploads/2025/03/pic8-3.jpg" />
+          <img src="https://starlinegroup.ae/uploads/projects/1764132317353_fa16050a2e431ba96456250b3aa2a56e.jpg" />
           <h2 className="fs-main-title">Desks + Workstation</h2>
         </div>
 
@@ -48,7 +48,7 @@ export default function FurnitureShowcase() {
           onTouchStart={() => handleSelect(3)}
           onMouseEnter={() => handleSelect(3)}   
         >
-          <img src="https://file.sunonglobal.com/wp-content/uploads/2025/03/pic8-3.jpg" />
+          <img src="https://starlinegroup.ae/uploads/projects/1764132317353_fa16050a2e431ba96456250b3aa2a56e.jpg" />
           <div className="fs-label"></div>
         </div>
 
@@ -59,7 +59,7 @@ export default function FurnitureShowcase() {
           onTouchStart={() => handleSelect(4)}
           onMouseEnter={() => handleSelect(4)}   
         >
-          <img src="https://file.sunonglobal.com/wp-content/uploads/2025/03/pic8-3.jpg" />
+          <img src="https://starlinegroup.ae/uploads/projects/1764132317353_fa16050a2e431ba96456250b3aa2a56e.jpg" />
           <div className="fs-label"></div>
         </div>
 

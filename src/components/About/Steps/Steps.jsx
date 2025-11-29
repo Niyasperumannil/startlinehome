@@ -44,9 +44,7 @@ export default function Steps() {
 
       </div>
 
-      <div className="btn-container">
-        <button className="book-btn">BOOK A STAND</button>
-      </div>
+     
     </div>
   );
 }
